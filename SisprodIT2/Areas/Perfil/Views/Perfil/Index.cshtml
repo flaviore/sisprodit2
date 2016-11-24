@@ -1,0 +1,58 @@
+﻿@model IEnumerable<SisprodIT2.Areas.Perfil.Models.PerfilModel>
+@{
+    ViewBag.Title = "Perfis";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="page-header">
+        <h1>
+            Cadastro de @ViewBag.Title</h1>
+        <p>
+            Esta página é destinada ao cadastro de @ViewBag.Title. Somente administradores possuem
+            permissão para manipular os @ViewBag.Title dos usuários.
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-md-6  col-md-offset-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        <strong>Lista de @ViewBag.Title</strong></p>
+                </div>
+                <div class="col-md-6 text-right">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    @{ string texto = "Adicionar " + ViewBag.Title; }
+                    @Html.ActionLink(texto, "Create")
+                </div>
+            </div>
+            <table class="table table-bordered">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Descricao)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.Ativo)
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="col-md-6">
+                            @Html.DisplayFor(modelItem => item.Descricao)
+                        </td>
+                        <td class="text-center col-md-2">
+                            @Html.DisplayFor(modelItem => item.Ativo)
+                        </td>
+                        <td class="text-center col-md-4">
+                            @Html.ActionLink("Editar", "Edit", new { id = item.PerfilModelId }) |
+                            @Html.ActionLink("Detalhes", "Details", new { id = item.PerfilModelId }) |
+                            @Html.ActionLink("Excluir", "Delete", new { id = item.PerfilModelId })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

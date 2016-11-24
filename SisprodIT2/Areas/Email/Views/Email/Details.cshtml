@@ -1,0 +1,58 @@
+﻿@model SisprodIT2.Areas.Email.Models.EmailModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>EmailModel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Funcionario.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Funcionario.Nome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DataCadastro)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DataCadastro)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DataAtualizacao)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DataAtualizacao)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FuncionarioAtualizadorId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FuncionarioAtualizadorId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Ativo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Ativo)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.EmailModelId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

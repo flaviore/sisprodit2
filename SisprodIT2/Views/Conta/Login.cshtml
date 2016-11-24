@@ -1,0 +1,65 @@
+﻿@model SisprodIT2.Models.Conta
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css") 
+</head>
+<body>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title"><img src="~/Images/logo.gif" height="60px" width="191"></p>
+            </div>
+        </div>
+    </header>
+    <div id="body">
+            <section class="content-wrapper main-content clear-fix">
+                @using (Html.BeginForm()) {
+                @Html.ValidationSummary(true)
+    
+                <fieldset>
+                    <legend>Conta</legend>
+    
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Login)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Login)
+                        @Html.ValidationMessageFor(model => model.Login)
+                    </div>
+    
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Senha)
+                    </div>
+                    <div class="editor-field">
+                        @Html.PasswordFor(model => model.Senha)
+                        @Html.ValidationMessageFor(model => model.Senha)
+                    </div>
+    
+                    <p>
+                        <input type="submit" value="Entrar" />
+                    </p>
+                </fieldset>
+                }
+            </section>
+        </div>
+    
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; @DateTime.Now.Year - SISPRODIT. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

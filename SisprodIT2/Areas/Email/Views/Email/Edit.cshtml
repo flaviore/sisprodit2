@@ -1,0 +1,78 @@
+﻿@model SisprodIT2.Areas.Email.Models.EmailModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>EmailModel</legend>
+
+        @Html.HiddenFor(model => model.EmailModelId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FuncionarioModelId, "Funcionario")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("FuncionarioModelId", String.Empty)
+            @Html.ValidationMessageFor(model => model.FuncionarioModelId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DataCadastro)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DataCadastro)
+            @Html.ValidationMessageFor(model => model.DataCadastro)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DataAtualizacao)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DataAtualizacao)
+            @Html.ValidationMessageFor(model => model.DataAtualizacao)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FuncionarioAtualizadorId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FuncionarioAtualizadorId)
+            @Html.ValidationMessageFor(model => model.FuncionarioAtualizadorId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Ativo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Ativo)
+            @Html.ValidationMessageFor(model => model.Ativo)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

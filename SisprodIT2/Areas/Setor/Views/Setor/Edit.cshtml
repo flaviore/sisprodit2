@@ -1,0 +1,109 @@
+﻿@model SisprodIT2.Areas.Setor.Models.SetorModel
+
+@{
+    ViewBag.Title = "Setores";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="page-header">
+        <h1>
+            Edição de @ViewBag.Title</h1>
+        <p>
+            Esta página é destinada à edição de @ViewBag.Title. Somente administradores possuem
+            permissão para manipular os @ViewBag.Title dos usuários.
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-offset-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        <strong>Edição de @ViewBag.Title</strong></p>
+                </div>
+            </div>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "", new { @style = "color: red" })
+	@Html.HiddenFor(model => model.FuncionarioAtualizadorId, new { Value = @ViewBag.FuncionarioModelId }) 
+    @Html.HiddenFor(model => model.DataCadastro)
+    @Html.HiddenFor(model => model.DataAtualizacao, new { Value = DateTime.Now.ToString(new System.Globalization.CultureInfo("pt-BR")) })
+
+    
+    if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Fechar</span></button>
+            <strong>Erro!</strong> 
+            <p>@Html.ValidationMessageFor(model => model.FuncionarioAtualizadorId)</p>
+            <p>@Html.ValidationMessageFor(model => model.DataCadastro)</p>
+            <p>@Html.ValidationMessageFor(model => model.DataAtualizacao)</p>
+        </div>
+    }
+            
+    
+    
+    
+
+        @Html.HiddenFor(model => model.SetorModelId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nome)
+        
+            @Html.EditorFor(model => model.Nome)
+            @Html.ValidationMessageFor(model => model.Nome)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sigla)
+        
+            @Html.EditorFor(model => model.Sigla)
+            @Html.ValidationMessageFor(model => model.Sigla)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Descricao)
+        
+            @Html.EditorFor(model => model.Descricao)
+            @Html.ValidationMessageFor(model => model.Descricao)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Telefone)
+        
+            @Html.EditorFor(model => model.Telefone)
+            @Html.ValidationMessageFor(model => model.Telefone)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ativo)
+        
+            @Html.EditorFor(model => model.Ativo)
+            @Html.ValidationMessageFor(model => model.Ativo)
+        </div>
+
+        <p>
+            <button type="submit" class="btn btn-default">Salvar</button>
+			@Html.ActionLink("Cancelar", "Index", new object { }, new { @class = "btn btn-Link" })
+        </p>
+
+}
+
+@Html.ActionLink("Voltar para a lista", "Index")
+            </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-1.9.1.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+    $("#Nome").addClass("form-control");
+    $("#Sigla").addClass("form-control");
+    $("#Descricao").addClass("form-control");
+    $("#Telefone").addClass("form-control");
+
+</script>
+
+

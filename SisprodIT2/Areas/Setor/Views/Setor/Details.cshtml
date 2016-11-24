@@ -1,0 +1,59 @@
+﻿@model SisprodIT2.Areas.Setor.Models.SetorModel
+@{
+    ViewBag.Title = "Setores";
+    ViewBag.TitleSingle = "Setor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="page-header">
+        <h1>
+            Detalhes de @ViewBag.Title</h1>
+        <p>
+            Esta página é destinada ao cadastro de @ViewBag.Title. Somente administradores possuem
+            permissão para manipular os @ViewBag.Title dos usuários.
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-offset-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        <strong>Detalhes do @ViewBag.TitleSingle?</strong></p>
+                </div>
+            </div>
+            <dl class="dl-horizontal">
+                <dt>@Html.DisplayNameFor(model => model.Nome)</dt>
+                <dd>@Html.DisplayFor(model => model.Nome)</dd>
+                <dt>@Html.DisplayNameFor(model => model.Sigla)</dt>
+                <dd>@Html.DisplayFor(model => model.Sigla)</dd>
+                <dt>@Html.DisplayNameFor(model => model.Descricao)</dt>
+                <dd>@Html.DisplayFor(model => model.Descricao)</dd>
+                <dt>@Html.DisplayNameFor(model => model.Telefone)</dt>
+                <dd>@Html.DisplayFor(model => model.Telefone)</dd>
+                <dt>@Html.DisplayNameFor(model => model.DataCadastro)</dt>
+                <dd>@Html.DisplayFor(model => model.DataCadastro)</dd>
+                <dt>@Html.DisplayNameFor(model => model.DataAtualizacao)</dt>
+                <dd>@Html.DisplayFor(model => model.DataAtualizacao)</dd>
+                <dt>@Html.DisplayNameFor(model => model.FuncionarioAtualizadorId)</dt>
+                <dd>@Html.DisplayFor(model => model.FuncionarioAtualizadorId)</dd>
+                <dt>@Html.DisplayNameFor(model => model.Ativo)</dt>
+                <dd>@Html.DisplayFor(model => model.Ativo)</dd>
+            </dl>
+            <p>
+                @Html.ActionLink("Editar", "Edit", new { id = Model.SetorModelId }, new { @class = "btn btn-Link" })
+                |
+                @Html.ActionLink("Voltar para a lista", "Index", new object { }, new { @class = "btn btn-Link" })
+            </p>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.9.1.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+    $("#Nome").addClass("form-control");
+    $("#Sigla").addClass("form-control");
+    $("#Descricao").addClass("form-control");
+    $("#Telefone").addClass("form-control");
+    $("#Ativo").addClass("checkbox");
+
+</script>

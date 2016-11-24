@@ -1,0 +1,107 @@
+﻿@model SisprodIT2.Areas.Funcionario.Models.FuncionarioModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>FuncionarioModel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CPF)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CPF)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RG)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RG)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Nascimento)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nascimento)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Altura)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Altura)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Usuario)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Usuario)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Senha)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Senha)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Perfil.Descricao)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Perfil.Descricao)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Setor.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Setor.Nome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DataCadastro)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DataCadastro)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DataAtualizacao)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DataAtualizacao)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FuncionarioAtualizadorId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FuncionarioAtualizadorId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Ativo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Ativo)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.FuncionarioModelId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

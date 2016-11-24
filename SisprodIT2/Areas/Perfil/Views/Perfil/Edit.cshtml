@@ -1,0 +1,70 @@
+﻿@model SisprodIT2.Areas.Perfil.Models.PerfilModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>PerfilModel</legend>
+
+        @Html.HiddenFor(model => model.PerfilModelId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Descricao)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Descricao)
+            @Html.ValidationMessageFor(model => model.Descricao)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DataCadastro)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DataCadastro)
+            @Html.ValidationMessageFor(model => model.DataCadastro)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DataAtualizacao)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DataAtualizacao)
+            @Html.ValidationMessageFor(model => model.DataAtualizacao)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FuncionarioAtualizadorId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FuncionarioAtualizadorId)
+            @Html.ValidationMessageFor(model => model.FuncionarioAtualizadorId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Ativo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Ativo)
+            @Html.ValidationMessageFor(model => model.Ativo)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
