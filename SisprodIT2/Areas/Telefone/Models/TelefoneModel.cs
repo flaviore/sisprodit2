@@ -13,6 +13,6 @@ namespace SisprodIT2.Areas.Telefone.Models
         public int DDD { get; set; }
         public int Telefone { get; set; }
         public int FuncionarioModelId { get; set; }
-        public virtual FuncionarioModel Funionario { get; set; }
+        public virtual FuncionarioModel Funcionario { get; set; }
     }
 }

@@ -1,0 +1,121 @@
+﻿@model IEnumerable<SisprodIT2.Areas.Chamado.Models.ChamadoModel>
+@{
+    ViewBag.Title = "Chamados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    Timer time = new Timer();
+    time.
+}
+<div class="container">
+    <div class="page-header">
+        <h1>
+            Cadastro de @ViewBag.Title</h1>
+        <p>
+            Esta página é destinada ao cadastro de @ViewBag.Title. Somente administradores possuem
+            permissão para manipular os @ViewBag.Title dos usuários.
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        <strong>Lista de @ViewBag.Title</strong></p>
+                </div>
+                <div class="col-md-6 text-right">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    @{ string texto = "Adicionar " + ViewBag.Title; }
+                    @Html.ActionLink(texto, "Create")
+                </div>
+            </div>
+            <table class="table table-bordered">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Titulo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Revisao)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Descricao)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Categoria)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FuncionarioCriadorId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FuncionarioResponsavelId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FinalizacaoModelId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DataCadastro)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DataAtualizacao)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FuncionarioAtualizadorId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Ativo)
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Titulo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Revisao)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Descricao)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CategoriaModelId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FuncionarioCriadorId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FuncionarioResponsavelId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FinalizacaoModelId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataCadastro)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataAtualizacao)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FuncionarioAtualizadorId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ativo)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.ChamadoModelId }) |
+                            @Html.ActionLink("Detalhes", "Details", new { id = item.ChamadoModelId }) |
+                            @Html.ActionLink("Excluir", "Delete", new { id = item.ChamadoModelId })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

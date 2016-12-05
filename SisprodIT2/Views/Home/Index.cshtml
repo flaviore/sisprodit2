@@ -1,21 +1,66 @@
-﻿@{
-    ViewBag.Title = "Abertura de Chamados";
+﻿@model IEnumerable<SisprodIT2.Areas.Chamado.Models.ChamadoModel>
+@{
+    ViewBag.Title = "Chamados Abertos";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 <div class="container">
-    <!-- Main component for a primary marketing message or call to action -->
-    <div class="jumbotron">
+    <div class="page-header">
         <h1>
-            Navbar example</h1>
+            @ViewBag.Title</h1>
         <p>
-            This example is a quick exercise to illustrate how the default, static and fixed
-            to top navbar work. It includes the responsive CSS and HTML, so it also adapts to
-            your viewport and device.</p>
-        <p>
-            To see the difference between static and fixed top navbars, just scroll.</p>
-        <p>
-            <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View
-                navbar docs &raquo;</a>
+            Abaixo temos a listagem dos seus @ViewBag.Title.
         </p>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        <strong>Lista de @ViewBag.Title</strong></p>
+                </div>
+            </div>
+            <table class="table table-bordered">
+                <tr>
+                    <th class="col-md-4">
+                        @Html.DisplayNameFor(model => model.Titulo)
+                    </th>
+                    <th class="col-md-2">
+                        @Html.DisplayNameFor(model => model.FuncionarioResponsavelId)
+                    </th>
+                    <th class="col-md-1">
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th class="col-md-2">
+                        @Html.DisplayNameFor(model => model.DataAtualizacao)
+                    </th>
+                    <th class="col-md-2 text-center">
+                        Ação
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Titulo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FuncionarioResponsavelId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataAtualizacao)
+                        </td>
+                        <td class="text-center">
+                            @Html.ActionLink("Editar", "Edit", "Chamado", new { Area = "Chamado", id = item.ChamadoModelId }, null)
+                          | @Html.ActionLink("Detalhes", "Details", "Chamado", new { Area = "Chamado", id = item.ChamadoModelId }, null)
+                            @*| @Html.ActionLink("Excluir", "Delete", new { id = item.ChamadoModelId })*@
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
     </div>
 </div>

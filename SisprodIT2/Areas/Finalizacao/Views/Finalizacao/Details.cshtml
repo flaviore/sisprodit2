@@ -1,0 +1,49 @@
+﻿@model SisprodIT2.Areas.Finalizacao.Models.FinalizacaoModel
+@{
+    ViewBag.Title = "Finalizações";
+    ViewBag.TitleSingle = "Finalização";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="page-header">
+        <h1>
+            Detalhes de @ViewBag.Title</h1>
+        <p>
+            Esta página é destinada ao cadastro de @ViewBag.Title. Somente administradores possuem
+            permissão para manipular os @ViewBag.Title dos usuários.
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-offset-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        <strong>Detalhes do @ViewBag.TitleSingle?</strong></p>
+                </div>
+            </div>
+            <dl class="dl-horizontal">
+                <dt>@Html.DisplayNameFor(model => model.Descricao)</dt>
+                <dd>@Html.DisplayFor(model => model.Descricao)</dd>
+                <dt>@Html.DisplayNameFor(model => model.DataCadastro)</dt>
+                <dd>@Html.DisplayFor(model => model.DataCadastro)</dd>
+                <dt>@Html.DisplayNameFor(model => model.DataAtualizacao)</dt>
+                <dd>@Html.DisplayFor(model => model.DataAtualizacao)</dd>
+                <dt>@Html.DisplayNameFor(model => model.FuncionarioAtualizadorId)</dt>
+                <dd>@Html.DisplayFor(model => model.FuncionarioAtualizadorId)</dd>
+                <dt>@Html.DisplayNameFor(model => model.Ativo)</dt>
+                <dd>@Html.DisplayFor(model => model.Ativo)</dd>
+            </dl>
+            <p>
+                @Html.ActionLink("Editar", "Edit", new { id = Model.FinalizacaoModelId }, new { @class = "btn btn-Link" })
+                |
+                @Html.ActionLink("Voltar para a lista", "Index", new { }, new { @class = "btn btn-Link" })
+            </p>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.9.1.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+    $("#Descricao").addClass("form-control");
+
+</script>

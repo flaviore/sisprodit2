@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Perfis";
+    ViewBag.TitleSingle = "Perfil";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -26,11 +27,13 @@
             </div>
 
 @using (Html.BeginForm()) {
-    @Html.ValidationSummary(true, "", new { @style = "color: red" })
+    @Html.ValidationSummary(true)
 	@Html.HiddenFor(model => model.FuncionarioAtualizadorId, new { Value = @ViewBag.FuncionarioModelId }) 
-    @Html.HiddenFor(model => model.DataCadastro, new { Value = DateTime.Now })
-    @Html.HiddenFor(model => model.DataAtualizacao, new { Value = DateTime.Now })
-    
+    @Html.HiddenFor(model => model.DataCadastro, new { Value = DateTime.Now.ToString(new System.Globalization.CultureInfo("pt-BR")) })
+    @Html.HiddenFor(model => model.DataAtualizacao, new { Value = DateTime.Now.ToString(new System.Globalization.CultureInfo("pt-BR")) })
+    @Html.ValidationMessageFor(model => model.DataCadastro)
+    @Html.ValidationMessageFor(model => model.DataAtualizacao)
+    @Html.ValidationMessageFor(model => model.FuncionarioAtualizadorId)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Descricao)
@@ -42,7 +45,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Ativo)
         
-            @Html.EditorFor(model => model.Ativo)
+            @Html.CheckBoxFor(model => model.Ativo, new { @checked = "checked" })
             @Html.ValidationMessageFor(model => model.Ativo)
         </div>
 
@@ -62,6 +65,7 @@
 <script type="text/javascript">
 
     $("#Descricao").addClass("form-control");
+    
 
 </script>
 

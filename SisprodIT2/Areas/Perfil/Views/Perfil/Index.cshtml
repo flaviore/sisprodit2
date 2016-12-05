@@ -28,6 +28,9 @@
             <table class="table table-bordered">
                 <tr>
                     <th>
+                        ID
+                    </th>
+                    <th>
                         @Html.DisplayNameFor(model => model.Descricao)
                     </th>
                     <th class="text-center">
@@ -39,7 +42,10 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td class="col-md-6">
+                        <td class="col-md-2">
+                            @Html.DisplayFor(modelItem => item.PerfilModelId)
+                        </td>
+                        <td class="col-md-4">
                             @Html.DisplayFor(modelItem => item.Descricao)
                         </td>
                         <td class="text-center col-md-2">

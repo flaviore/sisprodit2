@@ -20,6 +20,10 @@ namespace SisprodIT2.Areas.Email.Controllers
 
         public ActionResult Index()
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
             var emails = db.Emails.Include(e => e.Funcionario);
             return View(emails.ToList());
         }
@@ -29,6 +33,10 @@ namespace SisprodIT2.Areas.Email.Controllers
 
         public ActionResult Details(int id = 0)
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
             EmailModel emailmodel = db.Emails.Find(id);
             if (emailmodel == null)
             {
@@ -42,6 +50,10 @@ namespace SisprodIT2.Areas.Email.Controllers
 
         public ActionResult Create()
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
             ViewBag.FuncionarioModelId = new SelectList(db.Funcionarios, "FuncionarioModelId", "Nome");
             return View();
         }
@@ -52,6 +64,10 @@ namespace SisprodIT2.Areas.Email.Controllers
         [HttpPost]
         public ActionResult Create(EmailModel emailmodel)
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
             if (ModelState.IsValid)
             {
                 db.Emails.Add(emailmodel);
@@ -68,6 +84,10 @@ namespace SisprodIT2.Areas.Email.Controllers
 
         public ActionResult Edit(int id = 0)
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
             EmailModel emailmodel = db.Emails.Find(id);
             if (emailmodel == null)
             {
@@ -83,6 +103,10 @@ namespace SisprodIT2.Areas.Email.Controllers
         [HttpPost]
         public ActionResult Edit(EmailModel emailmodel)
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(emailmodel).State = EntityState.Modified;
@@ -98,6 +122,10 @@ namespace SisprodIT2.Areas.Email.Controllers
 
         public ActionResult Delete(int id = 0)
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
             EmailModel emailmodel = db.Emails.Find(id);
             if (emailmodel == null)
             {
@@ -112,6 +140,10 @@ namespace SisprodIT2.Areas.Email.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
             EmailModel emailmodel = db.Emails.Find(id);
             db.Emails.Remove(emailmodel);
             db.SaveChanges();

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<SisprodIT2.Areas.Finalizacao.Models.FinalizacaoModel>
+@{
+    ViewBag.Title = "Finalizações";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="page-header">
+        <h1>
+            Cadastro de @ViewBag.Title</h1>
+        <p>
+            Esta página é destinada ao cadastro de @ViewBag.Title. Somente administradores possuem
+            permissão para manipular os @ViewBag.Title dos usuários.
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        <strong>Lista de @ViewBag.Title</strong></p>
+                </div>
+                <div class="col-md-6 text-right">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    @{ string texto = "Adicionar " + ViewBag.Title; }
+                    @Html.ActionLink(texto, "Create")
+                </div>
+            </div>
+            <table class="table table-bordered">
+                <tr>
+                    <th class="col-md-1">
+                        ID
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Descricao)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Ativo)
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.FinalizacaoModelId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Descricao)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Ativo)
+                        </td>
+                        <td class="text-center">
+                            @Html.ActionLink("Editar", "Edit", new { id = item.FinalizacaoModelId }) |
+                            @Html.ActionLink("Detalhes", "Details", new { id = item.FinalizacaoModelId }) |
+                            @Html.ActionLink("Excluir", "Delete", new { id = item.FinalizacaoModelId })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

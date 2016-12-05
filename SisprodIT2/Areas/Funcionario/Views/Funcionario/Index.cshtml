@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<SisprodIT2.Areas.Funcionario.Models.FuncionarioModel>
-
 @{
     ViewBag.Title = "Funcionários";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,8 +8,8 @@
         <h1>
             Cadastro de @ViewBag.Title</h1>
         <p>
-            Esta página é destinada ao cadastro de @ViewBag.Title. Somente administradores possuem permissão
-            para manipular os @ViewBag.Title dos usuários.
+            Esta página é destinada ao cadastro de @ViewBag.Title. Somente administradores possuem
+            permissão para manipular os @ViewBag.Title dos usuários.
         </p>
     </div>
     <div class="row">
@@ -20,66 +19,63 @@
                     <p>
                         <strong>Lista de @ViewBag.Title</strong></p>
                 </div>
-
-				<div class="col-md-6 text-right">
+                <div class="col-md-6 text-right">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     @{ string texto = "Adicionar " + ViewBag.Title; }
                     @Html.ActionLink(texto, "Create")
                 </div>
-			</div>
-				<table class="table table-bordered">
-					<tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CPF)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Usuario)
-        </th>
-        <th>
-            @Html.DisplayName("Perfil")
-        </th>
-        <th>
-            @Html.DisplayName("Setor")
-        </th>
-        <th class="text-center">
-            @Html.DisplayNameFor(model => model.Ativo)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CPF)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Usuario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Perfil.Descricao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Setor.Nome)
-        </td>
-        <td class="col-md-1 text-center">
-            @Html.DisplayFor(modelItem => item.Ativo)
-        </td>
-        <td class="text-center">
-            @Html.ActionLink("Editar", "Edit", new { id=item.FuncionarioModelId }) |
-            @Html.ActionLink("Detalhes", "Details", new { id=item.FuncionarioModelId }) |
-            @Html.ActionLink("Excluir", "Delete", new { id=item.FuncionarioModelId })
-        </td>
-    </tr>
-}
-
-		</table>
-		</div>
-		
-	</div>
+            </div>
+            <table class="table table-bordered">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nome)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CPF)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Usuario)
+                    </th>
+                    <th>
+                        @Html.DisplayName("Perfil")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Setor")
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.Ativo)
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CPF)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Usuario)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Perfil.Descricao)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Setor.Nome)
+                        </td>
+                        <td class="col-md-1 text-center">
+                            @Html.DisplayFor(modelItem => item.Ativo)
+                        </td>
+                        <td class="text-center">
+                            @Html.ActionLink("Editar", "Edit", new { id = item.FuncionarioModelId }) |
+                            @Html.ActionLink("Detalhes", "Details", new { id = item.FuncionarioModelId }) | @*@Html.ActionLink("Excluir", "Delete", new { id=item.FuncionarioModelId })*@
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
 </div>

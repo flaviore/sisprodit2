@@ -1,0 +1,88 @@
+﻿@model IEnumerable<SisprodIT2.Areas.Telefone.Models.TelefoneModel>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="page-header">
+        <h1>
+            Cadastro de @ViewBag.Title</h1>
+        <p>
+            Esta página é destinada ao cadastro de @ViewBag.Title. Somente administradores possuem
+            permissão para manipular os @ViewBag.Title dos usuários.
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        <strong>Lista de @ViewBag.Title</strong></p>
+                </div>
+                <div class="col-md-6 text-right">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    @{ string texto = "Adicionar " + ViewBag.Title; }
+                    @Html.ActionLink(texto, "Create")
+                </div>
+            </div>
+            <table class="table table-bordered">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DDD)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Telefone)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FuncionarioModelId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DataCadastro)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DataAtualizacao)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FuncionarioAtualizadorId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Ativo)
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DDD)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telefone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FuncionarioModelId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataCadastro)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataAtualizacao)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FuncionarioAtualizadorId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ativo)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.TelefoneModelId }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.TelefoneModelId }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.TelefoneModelId })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

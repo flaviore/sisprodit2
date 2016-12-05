@@ -7,10 +7,12 @@ using System.Web;
 using System.Web.Mvc;
 using SisprodIT2.Areas.Telefone.Models;
 using SisprodIT2.Map;
+using SisprodIT2.Areas.Funcionario.Models;
 
 namespace SisprodIT2.Areas.Telefone.Controllers
 {
     [Authorize]
+    [SessionExpire]
     public class TelefoneController : Controller
     {
         private DataContext db = new DataContext();
@@ -18,10 +20,36 @@ namespace SisprodIT2.Areas.Telefone.Controllers
         //
         // GET: /Telefone/Telefone/
 
-        public ActionResult Index()
+        public ActionResult Index(int id = 0)
         {
-            var telefones = db.Telefones.Include(t => t.Funionario);
-            return View(telefones.ToList());
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
+            FuncionarioModel funcionariomodel = db.Funcionarios.Find(id);
+
+            //var telefones = db.Telefones.Include(t => t.Funcionario);
+            var telefones = db.Telefones.Where(x => x.FuncionarioModelId == funcionariomodel.FuncionarioModelId).ToList();
+            //return View(telefones.ToList());
+            return View(telefones);
+        }
+
+        public ActionResult List(int id = 0)
+        {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
+
+            FuncionarioModel funcionariomodel = db.Funcionarios.Find(id);
+            if (funcionariomodel == null)
+            {
+                return HttpNotFound();
+            }
+
+            var telefones = db.Telefones.Where(x => x.FuncionarioModelId == funcionariomodel.FuncionarioModelId).ToList();
+
+            return View(telefones);
         }
 
         //
@@ -29,6 +57,11 @@ namespace SisprodIT2.Areas.Telefone.Controllers
 
         public ActionResult Details(int id = 0)
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
+
             TelefoneModel telefonemodel = db.Telefones.Find(id);
             if (telefonemodel == null)
             {
@@ -42,6 +75,11 @@ namespace SisprodIT2.Areas.Telefone.Controllers
 
         public ActionResult Create()
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
+
             ViewBag.FuncionarioModelId = new SelectList(db.Funcionarios, "FuncionarioModelId", "Nome");
             return View();
         }
@@ -52,6 +90,11 @@ namespace SisprodIT2.Areas.Telefone.Controllers
         [HttpPost]
         public ActionResult Create(TelefoneModel telefonemodel)
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
+
             if (ModelState.IsValid)
             {
                 db.Telefones.Add(telefonemodel);
@@ -59,7 +102,7 @@ namespace SisprodIT2.Areas.Telefone.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.FuncionarioModelId = new SelectList(db.Funcionarios, "FuncionarioModelId", "Nome", telefonemodel.FuncionarioModelId);
+            ViewBag.FuncionarioModelId = telefonemodel.FuncionarioModelId;
             return View(telefonemodel);
         }
 
@@ -68,13 +111,19 @@ namespace SisprodIT2.Areas.Telefone.Controllers
 
         public ActionResult Edit(int id = 0)
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
+
             TelefoneModel telefonemodel = db.Telefones.Find(id);
             if (telefonemodel == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.FuncionarioModelId = new SelectList(db.Funcionarios, "FuncionarioModelId", "Nome", telefonemodel.FuncionarioModelId);
-            return View(telefonemodel);
+            ViewBag.FuncionarioModelId = Session["FuncionarioModelId"];
+            
+            return View("Edit",telefonemodel);
         }
 
         //
@@ -83,14 +132,24 @@ namespace SisprodIT2.Areas.Telefone.Controllers
         [HttpPost]
         public ActionResult Edit(TelefoneModel telefonemodel)
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(telefonemodel).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                ViewBag.Mensagem = "Telefone Alterado com sucesso.";
+                ViewBag.FuncionarioModelId = telefonemodel.FuncionarioModelId;
+                return View();
             }
-            ViewBag.FuncionarioModelId = new SelectList(db.Funcionarios, "FuncionarioModelId", "Nome", telefonemodel.FuncionarioModelId);
-            return View(telefonemodel);
+            
+            //return View(telefonemodel);
+            return View("Edit", "Telefone", new { area = "Telefone", model = telefonemodel });
+            
         }
 
         //
@@ -98,11 +157,17 @@ namespace SisprodIT2.Areas.Telefone.Controllers
 
         public ActionResult Delete(int id = 0)
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
+
             TelefoneModel telefonemodel = db.Telefones.Find(id);
             if (telefonemodel == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.FuncionarioModelId = Session["FuncionarioModelId"];
             return View(telefonemodel);
         }
 
@@ -112,10 +177,16 @@ namespace SisprodIT2.Areas.Telefone.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
+
             TelefoneModel telefonemodel = db.Telefones.Find(id);
             db.Telefones.Remove(telefonemodel);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            var mensagem = "Telefone Excluído com sucesso.";
+            return RedirectToAction("Edit", "Funcionario", new { area = "Funcionario", id = telefonemodel.FuncionarioModelId, mensagem });
         }
 
         protected override void Dispose(bool disposing)

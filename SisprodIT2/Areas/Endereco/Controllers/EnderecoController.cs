@@ -20,6 +20,10 @@ namespace SisprodIT2.Areas.Endereco.Controllers
 
         public ActionResult Index()
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
             var enderecos = db.Enderecos.Include(e => e.Funcionario);
             return View(enderecos.ToList());
         }
@@ -29,6 +33,10 @@ namespace SisprodIT2.Areas.Endereco.Controllers
 
         public ActionResult Details(int id = 0)
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
             EnderecoModel enderecomodel = db.Enderecos.Find(id);
             if (enderecomodel == null)
             {
@@ -42,6 +50,10 @@ namespace SisprodIT2.Areas.Endereco.Controllers
 
         public ActionResult Create()
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
             ViewBag.FuncionarioModelId = new SelectList(db.Funcionarios, "FuncionarioModelId", "Nome");
             return View();
         }
@@ -52,6 +64,10 @@ namespace SisprodIT2.Areas.Endereco.Controllers
         [HttpPost]
         public ActionResult Create(EnderecoModel enderecomodel)
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
             if (ModelState.IsValid)
             {
                 db.Enderecos.Add(enderecomodel);
@@ -68,6 +84,10 @@ namespace SisprodIT2.Areas.Endereco.Controllers
 
         public ActionResult Edit(int id = 0)
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
             EnderecoModel enderecomodel = db.Enderecos.Find(id);
             if (enderecomodel == null)
             {
@@ -83,6 +103,10 @@ namespace SisprodIT2.Areas.Endereco.Controllers
         [HttpPost]
         public ActionResult Edit(EnderecoModel enderecomodel)
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(enderecomodel).State = EntityState.Modified;
@@ -98,6 +122,10 @@ namespace SisprodIT2.Areas.Endereco.Controllers
 
         public ActionResult Delete(int id = 0)
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
             EnderecoModel enderecomodel = db.Enderecos.Find(id);
             if (enderecomodel == null)
             {
@@ -112,6 +140,10 @@ namespace SisprodIT2.Areas.Endereco.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
             EnderecoModel enderecomodel = db.Enderecos.Find(id);
             db.Enderecos.Remove(enderecomodel);
             db.SaveChanges();

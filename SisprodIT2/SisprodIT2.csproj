@@ -122,11 +122,22 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Categoria\CategoriaAreaRegistration.cs" />
+    <Compile Include="Areas\Categoria\Controllers\CategoriaController.cs" />
+    <Compile Include="Areas\Categoria\Models\CategoriaModel.cs" />
+    <Compile Include="Areas\Chamado\ChamadoAreaRegistration.cs" />
+    <Compile Include="Areas\Chamado\Controllers\ChamadoController.cs" />
+    <Compile Include="Areas\Chamado\Models\ChamadoModel.cs" />
+    <Compile Include="Areas\Comentario\ComentarioAreaRegistration.cs" />
+    <Compile Include="Areas\Comentario\Models\ComentarioModel.cs" />
     <Compile Include="Areas\Email\Controllers\EmailController.cs" />
     <Compile Include="Areas\Email\EmailAreaRegistration.cs" />
     <Compile Include="Areas\Email\Models\EmailModel.cs" />
     <Compile Include="Areas\Endereco\Controllers\EnderecoController.cs" />
     <Compile Include="Areas\Endereco\Models\EnderecoModel.cs" />
+    <Compile Include="Areas\Finalizacao\Controllers\FinalizacaoController.cs" />
+    <Compile Include="Areas\Finalizacao\FinalizacaoAreaRegistration.cs" />
+    <Compile Include="Areas\Finalizacao\Models\FinalizacaoModel.cs" />
     <Compile Include="Areas\Funcionario\Controllers\FuncionarioController.cs" />
     <Compile Include="Areas\Perfil\Controllers\PerfilController.cs" />
     <Compile Include="Areas\Perfil\Models\PerfilModel.cs" />
@@ -145,9 +156,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Map\CategoriaMap.cs" />
+    <Compile Include="Map\ChamadoMap.cs" />
+    <Compile Include="Map\ComentarioMap.cs" />
     <Compile Include="Map\DataContext.cs" />
     <Compile Include="Map\EmailMap.cs" />
     <Compile Include="Map\EnderecoMap.cs" />
+    <Compile Include="Map\FinalizacaoMap.cs" />
     <Compile Include="Map\FuncionarioMap.cs" />
     <Compile Include="Map\PerfilMap.cs" />
     <Compile Include="Map\SetorMap.cs" />
@@ -155,6 +170,18 @@
     <Compile Include="Migrations\201611061616165_Inicial.cs" />
     <Compile Include="Migrations\201611061616165_Inicial.Designer.cs">
       <DependentUpon>201611061616165_Inicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612020233508_TabelasChamados.cs" />
+    <Compile Include="Migrations\201612020233508_TabelasChamados.Designer.cs">
+      <DependentUpon>201612020233508_TabelasChamados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612040232535_FuncionarioResponsavel.cs" />
+    <Compile Include="Migrations\201612040232535_FuncionarioResponsavel.Designer.cs">
+      <DependentUpon>201612040232535_FuncionarioResponsavel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612041712334_RemovidoFinalizacaoRequerido.cs" />
+    <Compile Include="Migrations\201612041712334_RemovidoFinalizacaoRequerido.Designer.cs">
+      <DependentUpon>201612041712334_RemovidoFinalizacaoRequerido.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseCadastro.cs" />
@@ -285,8 +312,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Categoria\Views\Shared\" />
+    <Folder Include="Areas\Chamado\Views\Shared\" />
+    <Folder Include="Areas\Comentario\Controllers\" />
+    <Folder Include="Areas\Comentario\Views\Shared\" />
     <Folder Include="Areas\Email\Views\Shared\" />
+    <Folder Include="Areas\Endereco\Views\Endereco\" />
     <Folder Include="Areas\Endereco\Views\Shared\" />
+    <Folder Include="Areas\Finalizacao\Views\Shared\" />
     <Folder Include="Areas\Funcionario\Views\Shared\" />
     <Folder Include="Areas\Perfil\Views\Shared\" />
     <Folder Include="Areas\Setor\Views\Shared\" />
@@ -320,31 +353,23 @@
     <EmbeddedResource Include="Migrations\201611061616165_Inicial.resx">
       <DependentUpon>201611061616165_Inicial.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612020233508_TabelasChamados.resx">
+      <DependentUpon>201612020233508_TabelasChamados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612040232535_FuncionarioResponsavel.resx">
+      <DependentUpon>201612040232535_FuncionarioResponsavel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612041712334_RemovidoFinalizacaoRequerido.resx">
+      <DependentUpon>201612041712334_RemovidoFinalizacaoRequerido.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Setor\Views\Setor\Index.cshtml" />
-    <Content Include="Areas\Perfil\Views\Perfil\Details.cshtml" />
-    <Content Include="Areas\Perfil\Views\Perfil\Edit.cshtml" />
-    <Content Include="Areas\Perfil\Views\Perfil\Delete.cshtml" />
-    <Content Include="Areas\Funcionario\Views\Funcionario\Details.cshtml" />
-    <Content Include="Areas\Funcionario\Views\Funcionario\Create.cshtml" />
-    <Content Include="Areas\Funcionario\Views\Funcionario\Edit.cshtml" />
-    <Content Include="Areas\Funcionario\Views\Funcionario\Delete.cshtml" />
     <Content Include="Areas\Email\Views\Email\Index.cshtml" />
     <Content Include="Areas\Email\Views\Email\Details.cshtml" />
     <Content Include="Areas\Email\Views\Email\Create.cshtml" />
     <Content Include="Areas\Email\Views\Email\Edit.cshtml" />
     <Content Include="Areas\Email\Views\Email\Delete.cshtml" />
-    <Content Include="Areas\Endereco\Views\Endereco\Index.cshtml" />
-    <Content Include="Areas\Endereco\Views\Endereco\Details.cshtml" />
-    <Content Include="Areas\Endereco\Views\Endereco\Create.cshtml" />
-    <Content Include="Areas\Endereco\Views\Endereco\Edit.cshtml" />
-    <Content Include="Areas\Endereco\Views\Endereco\Delete.cshtml" />
-    <Content Include="Areas\Telefone\Views\Telefone\Index.cshtml" />
-    <Content Include="Areas\Telefone\Views\Telefone\Details.cshtml" />
-    <Content Include="Areas\Telefone\Views\Telefone\Create.cshtml" />
-    <Content Include="Areas\Telefone\Views\Telefone\Edit.cshtml" />
-    <Content Include="Areas\Telefone\Views\Telefone\Delete.cshtml" />
     <Content Include="CodeTemplates\AddView\CSHTML\Create.cshtml">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -378,10 +403,35 @@
     <Content Include="Areas\Setor\Views\Setor\Create.cshtml" />
     <Content Include="Areas\Perfil\Views\Perfil\Index.cshtml" />
     <Content Include="Areas\Funcionario\Views\Funcionario\Index.cshtml" />
-    <Content Include="Areas\Perfil\Views\Perfil\Create.cshtml" />
     <Content Include="Areas\Setor\Views\Setor\Edit.cshtml" />
     <Content Include="Areas\Setor\Views\Setor\Delete.cshtml" />
     <Content Include="Areas\Setor\Views\Setor\Details.cshtml" />
+    <Content Include="Areas\Perfil\Views\Perfil\Delete.cshtml" />
+    <Content Include="Areas\Perfil\Views\Perfil\Edit.cshtml" />
+    <Content Include="Areas\Perfil\Views\Perfil\Create.cshtml" />
+    <Content Include="Areas\Perfil\Views\Perfil\Details.cshtml" />
+    <Content Include="Areas\Funcionario\Views\Funcionario\Details.cshtml" />
+    <Content Include="Areas\Funcionario\Views\Funcionario\Create.cshtml" />
+    <Content Include="Areas\Funcionario\Views\Funcionario\Edit.cshtml" />
+    <Content Include="Areas\Telefone\Views\Telefone\List.cshtml" />
+    <Content Include="Areas\Telefone\Views\Telefone\Edit.cshtml" />
+    <Content Include="Areas\Telefone\Views\Telefone\Delete.cshtml" />
+    <Content Include="Areas\Finalizacao\Views\Web.config" />
+    <Content Include="Areas\Comentario\Views\Web.config" />
+    <Content Include="Areas\Categoria\Views\Web.config" />
+    <Content Include="Areas\Chamado\Views\Web.config" />
+    <Content Include="Areas\Categoria\Views\Categoria\Index.cshtml" />
+    <Content Include="Areas\Categoria\Views\Categoria\Details.cshtml" />
+    <Content Include="Areas\Categoria\Views\Categoria\Create.cshtml" />
+    <Content Include="Areas\Categoria\Views\Categoria\Edit.cshtml" />
+    <Content Include="Areas\Categoria\Views\Categoria\Delete.cshtml" />
+    <Content Include="Areas\Finalizacao\Views\Finalizacao\Index.cshtml" />
+    <Content Include="Areas\Finalizacao\Views\Finalizacao\Details.cshtml" />
+    <Content Include="Areas\Finalizacao\Views\Finalizacao\Create.cshtml" />
+    <Content Include="Areas\Finalizacao\Views\Finalizacao\Edit.cshtml" />
+    <Content Include="Areas\Finalizacao\Views\Finalizacao\Delete.cshtml" />
+    <Content Include="Areas\Chamado\Views\Chamado\Index.cshtml" />
+    <Content Include="Areas\Chamado\Views\Chamado\Create.cshtml" />
     <None Include="CodeTemplates\AddView\CSHTML\Listar.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Listar.cshtml</LastGenOutput>
@@ -462,6 +512,7 @@
     <None Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\Conta\Login.cshtml" />
     <Content Include="Views\Shared\EditorTemplate\DateTime.cshtml" />
+    <Content Include="Views\Shared\SemPermissao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -1,0 +1,83 @@
+﻿@model SisprodIT2.Areas.Chamado.Models.ChamadoModel
+@{
+    ViewBag.Title = "Chamado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="page-header">
+        <h1>
+            Cadastro de @ViewBag.Title</h1>
+        <p>
+            Esta página é destinada ao cadastro de @ViewBag.Title. Use o formulário abaixo para criar um chamado.
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-offset-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        <strong>Cadastro de @ViewBag.Title</strong></p>
+                </div>
+            </div>
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary(true, "", new { @class = "text-danager" })
+                @Html.HiddenFor(model => model.FuncionarioResponsavelId, new { Value = @ViewBag.FuncionarioModelId }) 
+                @Html.HiddenFor(model => model.FuncionarioAtualizadorId, new { Value = @ViewBag.FuncionarioModelId }) 
+                @Html.HiddenFor(model => model.FuncionarioCriadorId, new { Value = @ViewBag.FuncionarioModelId }) 
+                @Html.HiddenFor(model => model.DataCadastro, new { Value = DateTime.Now.ToString(new System.Globalization.CultureInfo("pt-BR")) })
+                @Html.HiddenFor(model => model.DataAtualizacao, new { Value = DateTime.Now.ToString(new System.Globalization.CultureInfo("pt-BR")) })
+
+                @Html.HiddenFor(model => model.Revisao, new { Value = 1 })
+                @Html.HiddenFor(model => model.Status, new { Value = "Aberto" })
+                @Html.HiddenFor(model => model.FinalizacaoModelId, new { Value = @ViewBag.FinalizacaoModelId })
+
+                
+                @Html.ValidationMessageFor(model => model.DataCadastro)
+                @Html.ValidationMessageFor(model => model.DataAtualizacao)
+                @Html.ValidationMessageFor(model => model.FuncionarioResponsavelId)
+                
+                
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Titulo)
+                    @Html.EditorFor(model => model.Titulo)
+                    @Html.ValidationMessageFor(model => model.Titulo)
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Descricao)
+                    @Html.TextAreaFor(model => model.Descricao, 10, 40, null)
+                    @Html.ValidationMessageFor(model => model.Descricao)
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CategoriaModelId)
+                    @Html.DropDownList("CategoriaModelId", String.Empty)
+                    @Html.ValidationMessageFor(model => model.CategoriaModelId)
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Ativo)
+                    @Html.CheckBoxFor(model => model.Ativo, new { @checked = "checked" })
+                    @Html.ValidationMessageFor(model => model.Ativo)
+                </div>
+
+                <p>
+                    <button type="submit" class="btn btn-default">
+                        Adicionar</button>
+                    @Html.ActionLink("Cancelar", "Index", new object { }, new { @class = "btn btn-Link" })
+                </p>
+    
+            }
+            @Html.ActionLink("Voltar para a lista", "Index")
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.9.1.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+    $("#Titulo").addClass("form-control");
+    $("#Descricao").addClass("form-control");
+    $("#CategoriaModelId").addClass("form-control");
+
+</script>

@@ -25,13 +25,15 @@ namespace SisprodIT2.Controllers
         public ActionResult Login(FormCollection form, string ReturnUrl)
         {
             string usuario = form["Login"];
-            FuncionarioModel funcionario = db.Funcionarios.Where(x => x.Usuario == usuario).FirstOrDefault();
+            FuncionarioModel funcionario = db.Funcionarios.Where(x => x.Usuario == usuario).Where(x => x.Ativo == true).FirstOrDefault();
+            funcionario.Perfil = db.Perfis.Where(x => x.PerfilModelId == funcionario.PerfilModelId).FirstOrDefault();
             if (form["senha"] == funcionario.Senha)
             {
 
                 System.Web.Security.FormsAuthentication.SetAuthCookie(form["login"], false);
                 Session["NomeUsuario"] = funcionario.Nome;
                 Session["FuncionarioModelId"] = funcionario.FuncionarioModelId;
+                Session["Perfil"] = funcionario.Perfil.Descricao; 
                 if (!string.IsNullOrEmpty(ReturnUrl))
                 {
                     return Redirect(ReturnUrl);

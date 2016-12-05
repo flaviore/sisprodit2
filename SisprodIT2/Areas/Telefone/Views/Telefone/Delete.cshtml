@@ -1,68 +1,66 @@
 ﻿@model SisprodIT2.Areas.Telefone.Models.TelefoneModel
-
 @{
     ViewBag.Title = "Delete";
+    ViewBag.TitleSingle = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container">
+    <div class="page-header">
+        <h1>
+            Exclusão de @ViewBag.Title</h1>
+        <p>
+            Esta página é destinada ao cadastro de @ViewBag.Title. Somente administradores possuem
+            permissão para manipular os @ViewBag.Title dos usuários.
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-offset-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        <strong>Deseja excluir este @ViewBag.TitleSingle?</strong></p>
+                </div>
+            </div>
+            @if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+                {
+                @: <div class="alert alert-success alert-dismissible" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @:     <strong>Sucesso!</strong> O telefone foi alterado com sucesso. Clique em "Voltar para a lista" para retornar.
+                @: </div>
+                }
+            <dl class="dl-horizontal">
+                <dt>@Html.DisplayNameFor(model => model.DDD)</dt>
+                <dd>@Html.DisplayFor(model => model.DDD)</dd>
+                <dt>@Html.DisplayNameFor(model => model.Telefone)</dt>
+                <dd>@Html.DisplayFor(model => model.Telefone)</dd>
+                <dt>@Html.DisplayNameFor(model => model.FuncionarioModelId)</dt>
+                <dd>@Html.DisplayFor(model => model.FuncionarioModelId)</dd>
+                <dt>@Html.DisplayNameFor(model => model.DataCadastro)</dt>
+                <dd>@Html.DisplayFor(model => model.DataCadastro)</dd>
+                <dt>@Html.DisplayNameFor(model => model.DataAtualizacao)</dt>
+                <dd>@Html.DisplayFor(model => model.DataAtualizacao)</dd>
+                <dt>@Html.DisplayNameFor(model => model.FuncionarioAtualizadorId)</dt>
+                <dd>@Html.DisplayFor(model => model.FuncionarioAtualizadorId)</dd>
+                <dt>@Html.DisplayNameFor(model => model.Ativo)</dt>
+                <dd>@Html.DisplayFor(model => model.Ativo)</dd>
+            </dl>
+            @using (Html.BeginForm())
+            {
+                <p>
+                    <button type="submit" class="btn btn-default">
+                        Excluir</button>
+                    @Html.ActionLink("Cancelar", "Edit", "Funcionario", new { area = "Funcionario", id = ViewBag.FuncionarioModelId }, new { })
+                </p>
+            }
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.9.1.js" type="text/javascript"></script>
+<script type="text/javascript">
 
-<h2>Delete</h2>
+    $("#Nome").addClass("form-control");
+    $("#Sigla").addClass("form-control");
+    $("#Descricao").addClass("form-control");
+    $("#Telefone").addClass("form-control");
+    $("#Ativo").addClass("checkbox");
 
-<h3>Are you sure you want to delete this?</h3>
-<fieldset>
-    <legend>TelefoneModel</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DDD)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DDD)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Telefone)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Telefone)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Funionario.Nome)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Funionario.Nome)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DataCadastro)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DataCadastro)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DataAtualizacao)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DataAtualizacao)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.FuncionarioAtualizadorId)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FuncionarioAtualizadorId)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Ativo)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Ativo)
-    </div>
-</fieldset>
-@using (Html.BeginForm()) {
-    <p>
-        <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-}
+</script>

@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "SemPermissao";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+	
+	<div class="row">
+		
+		<div class="col-md-12">
+			
+			<div class="error-container">
+				<h2>Acesso Negado!</h2>
+				
+				<div class="error-details">
+					<p>Você está logado com o usuário <strong>@Session["NomeUsuario"].ToString()</strong>. </p>
+                    <p>Este usuário não possui as permissões necessárias para acessar este recurso.</p>
+					
+				</div> <!-- /error-details -->
+							
+			</div> <!-- /error-container -->			
+			
+		</div> <!-- /span12 -->
+		
+	</div> <!-- /row -->
+	
+</div> <!-- /container -->

@@ -21,6 +21,10 @@ namespace SisprodIT2.Areas.Setor.Controllers
 
         public ActionResult Index()
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
             return View(db.Setores.ToList());
         }
 
@@ -29,6 +33,10 @@ namespace SisprodIT2.Areas.Setor.Controllers
 
         public ActionResult Details(int id = 0)
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
             SetorModel setormodel = db.Setores.Find(id);
             if (setormodel == null)
             {
@@ -42,6 +50,10 @@ namespace SisprodIT2.Areas.Setor.Controllers
 
         public ActionResult Create()
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
             ViewBag.FuncionarioModelId = Session["FuncionarioModelId"];
             return View();
         }
@@ -52,6 +64,10 @@ namespace SisprodIT2.Areas.Setor.Controllers
         [HttpPost]
         public ActionResult Create(SetorModel setormodel)
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
             if (ModelState.IsValid)
             {
                 db.Setores.Add(setormodel);
@@ -67,6 +83,10 @@ namespace SisprodIT2.Areas.Setor.Controllers
 
         public ActionResult Edit(int id = 0)
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
             ViewBag.FuncionarioModelId = Session["FuncionarioModelId"];
             SetorModel setormodel = db.Setores.Find(id);
             if (setormodel == null)
@@ -82,6 +102,10 @@ namespace SisprodIT2.Areas.Setor.Controllers
         [HttpPost]
         public ActionResult Edit(SetorModel setormodel, FormCollection form)
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(setormodel).State = EntityState.Modified;
@@ -104,6 +128,10 @@ namespace SisprodIT2.Areas.Setor.Controllers
 
         public ActionResult Delete(int id = 0)
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
             SetorModel setormodel = db.Setores.Find(id);
             
             if (setormodel == null)
@@ -119,6 +147,10 @@ namespace SisprodIT2.Areas.Setor.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!Session["Perfil"].ToString().Equals("Administrador"))
+            {
+                return RedirectToAction("SemPermissao", "Home", new { area = "" });
+            }
             SetorModel setormodel = db.Setores.Find(id);
             db.Setores.Remove(setormodel);
             db.SaveChanges();

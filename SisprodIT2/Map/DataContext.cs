@@ -10,6 +10,10 @@ using SisprodIT2.Areas.Telefone.Models;
 using SisprodIT2.Areas.Endereco.Models;
 using SisprodIT2.Areas.Email.Models;
 using SisprodIT2.Areas.Funcionario.Models;
+using SisprodIT2.Areas.Categoria.Models;
+using SisprodIT2.Areas.Finalizacao.Models;
+using SisprodIT2.Areas.Comentario.Models;
+using SisprodIT2.Areas.Chamado.Models;
 
 namespace SisprodIT2.Map
 {
@@ -28,6 +32,10 @@ namespace SisprodIT2.Map
         public DbSet<EnderecoModel> Enderecos { get; set; }
         public DbSet<EmailModel> Emails { get; set; }
         public DbSet<FuncionarioModel> Funcionarios { get; set; }
+        public DbSet<CategoriaModel> Categorias { get; set; }
+        public DbSet<FinalizacaoModel> Finalizacoes { get; set; }
+        public DbSet<ComentarioModel> Comentarios { get; set; }
+        public DbSet<ChamadoModel> Chamados { get; set; }
 
         protected override void  OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -41,6 +49,10 @@ namespace SisprodIT2.Map
             modelBuilder.Configurations.Add(new EnderecoMap());
             modelBuilder.Configurations.Add(new EmailMap());
             modelBuilder.Configurations.Add(new FuncionarioMap());
+            modelBuilder.Configurations.Add(new CategoriaMap());
+            modelBuilder.Configurations.Add(new FinalizacaoMap());
+            modelBuilder.Configurations.Add(new ComentarioMap());
+            modelBuilder.Configurations.Add(new ChamadoMap());
 
  	        base.OnModelCreating(modelBuilder);
         }

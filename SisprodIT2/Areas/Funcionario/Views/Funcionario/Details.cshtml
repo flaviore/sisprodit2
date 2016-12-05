@@ -1,107 +1,84 @@
 ﻿@model SisprodIT2.Areas.Funcionario.Models.FuncionarioModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Funcionários";
+	ViewBag.TitleSingle = "Funcionário";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
 
-<fieldset>
-    <legend>FuncionarioModel</legend>
+<div class="container">
+    <div class="page-header">
+        <h1>
+            Detalhes de @ViewBag.Title</h1>
+        <p>
+            Esta página é destinada ao cadastro de @ViewBag.Title. Somente administradores possuem
+            permissão para manipular os dados dos @ViewBag.Title.
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-offset-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        <strong>Detalhes do @ViewBag.TitleSingle?</strong></p>
+                </div>
+            </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Nome)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Nome)
-    </div>
+<dl class="dl-horizontal">
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.CPF)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.CPF)
-    </div>
+    <dt>@Html.DisplayNameFor(model => model.Nome)</dt>
+        <dd>@Html.DisplayFor(model => model.Nome)</dd>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.RG)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.RG)
-    </div>
+    <dt>@Html.DisplayNameFor(model => model.CPF)</dt>
+        <dd>@Html.DisplayFor(model => model.CPF)</dd>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Nascimento)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Nascimento)
-    </div>
+    <dt>@Html.DisplayNameFor(model => model.RG)</dt>
+        <dd>@Html.DisplayFor(model => model.RG)</dd>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Altura)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Altura)
-    </div>
+    <dt>@Html.DisplayNameFor(model => model.Nascimento)</dt>
+        <dd>@Html.DisplayFor(model => model.Nascimento)</dd>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Usuario)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Usuario)
-    </div>
+    <dt>@Html.DisplayNameFor(model => model.Altura)</dt>
+        <dd>@Html.DisplayFor(model => model.Altura)</dd>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Senha)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Senha)
-    </div>
+    <dt>@Html.DisplayNameFor(model => model.Usuario)</dt>
+        <dd>@Html.DisplayFor(model => model.Usuario)</dd>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Perfil.Descricao)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Perfil.Descricao)
-    </div>
+    <dt>@Html.DisplayNameFor(model => model.PerfilModelId)</dt>
+        <dd>@Html.DisplayFor(model => model.Perfil.Descricao)</dd>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Setor.Nome)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Setor.Nome)
-    </div>
+    <dt>@Html.DisplayNameFor(model => model.SetorModelId)</dt>
+        <dd>@Html.DisplayFor(model => model.Setor.Nome)</dd>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DataCadastro)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DataCadastro)
-    </div>
+    <dt>@Html.DisplayNameFor(model => model.DataCadastro)</dt>
+        <dd>@Html.DisplayFor(model => model.DataCadastro)</dd>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DataAtualizacao)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DataAtualizacao)
-    </div>
+    <dt>@Html.DisplayNameFor(model => model.DataAtualizacao)</dt>
+        <dd>@Html.DisplayFor(model => model.DataAtualizacao)</dd>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.FuncionarioAtualizadorId)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FuncionarioAtualizadorId)
-    </div>
+    <dt>@Html.DisplayNameFor(model => model.FuncionarioAtualizadorId)</dt>
+        <dd>@Html.DisplayFor(model => model.FuncionarioAtualizadorId)</dd>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Ativo)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Ativo)
-    </div>
-</fieldset>
+    <dt>@Html.DisplayNameFor(model => model.Ativo)</dt>
+        <dd>@Html.DisplayFor(model => model.Ativo)</dd>
+</dl>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.FuncionarioModelId }) |
-    @Html.ActionLink("Back to List", "Index")
+	@Html.ActionLink("Editar", "Edit", new { id=Model.FuncionarioModelId }, new { @class = "btn btn-Link" }) | 
+    @Html.ActionLink("Voltar para a lista", "Index", new { }, new { @class = "btn btn-Link" })
 </p>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery-1.9.1.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+//    $("#Nome").addClass("form-control");
+//    $("#Sigla").addClass("form-control");
+//    $("#Descricao").addClass("form-control");
+//    $("#Telefone").addClass("form-control");
+//    $("#Ativo").addClass("checkbox");
+
+</script>

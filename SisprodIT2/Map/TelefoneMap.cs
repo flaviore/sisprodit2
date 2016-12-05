@@ -24,7 +24,7 @@ namespace SisprodIT2.Map
             Property(x => x.FuncionarioAtualizadorId).IsRequired();
             Property(x => x.Ativo).IsRequired();
 
-            HasRequired(x => x.Funionario)
+            HasRequired(x => x.Funcionario)
                 .WithMany(y => y.TelefoneLista)
                 .HasForeignKey(x => x.FuncionarioModelId)
                 .WillCascadeOnDelete(false);
