@@ -25,21 +25,24 @@ namespace SisprodIT2.Map
             Property(x => x.Descricao).IsOptional();
             Property(x => x.CategoriaModelId).IsRequired();
             Property(x => x.FuncionarioCriadorId).IsRequired();
-            Property(x => x.FuncionarioResponsavelId).IsOptional();
-            Property(x => x.FinalizacaoModelId).IsOptional();
-
+            
             Property(x => x.DataCadastro).IsRequired();
             Property(x => x.DataAtualizacao).IsOptional();
             Property(x => x.FuncionarioAtualizadorId).IsRequired();
             Property(x => x.Ativo).IsRequired();
 
+            HasRequired(x => x.FuncionarioAtualizador)
+                .WithMany(x => x.ChamadoListaAtualizador)
+                .HasForeignKey(x => x.FuncionarioAtualizadorId)
+                .WillCascadeOnDelete(false);
+
             HasRequired(x => x.FuncionarioCriador)
-                .WithMany(x => x.ChamadoLista)
+                .WithMany(x => x.ChamadoListaCriador)
                 .HasForeignKey(x => x.FuncionarioCriadorId)
                 .WillCascadeOnDelete(false);
 
             HasOptional(x => x.FuncionarioResponsavel)
-                .WithMany(x => x.ChamadoLista)
+                .WithMany(x => x.ChamadoListaResponsavel)
                 .HasForeignKey(x => x.FuncionarioResponsavelId)
                 .WillCascadeOnDelete(false);
 

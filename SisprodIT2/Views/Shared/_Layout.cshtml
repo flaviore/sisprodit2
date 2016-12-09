@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -15,13 +14,15 @@
     @Styles.Render("~/Content/bootstrap")
     @*@Styles.Render("~/Content/css")*@
     <style>
-        body {
-  min-height: 2000px;
-}
-
-.navbar-static-top {
-  margin-bottom: 19px;
-}
+        body
+        {
+            min-height: 2000px;
+        }
+        
+        .navbar-static-top
+        {
+            margin-bottom: 19px;
+        }
     </style>
 </head>
 <body>
@@ -36,53 +37,55 @@
                         <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span
                             class="icon-bar"></span><span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><img src="~/Images/logo.gif" height="40px" width="127"></a>
+                    <a class="navbar-brand" href="#">
+                        <img src="~/Images/logo.gif" height="40px" width="127px"></a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="~/Home/Index">Home</a></li>
                         @*<li><a href="#">About</a></li>
                         <li><a href="#">Contact</a></li>*@
-                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                            aria-haspopup="true" aria-expanded="false">Cadastros<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li class="dropdown-header">Cadastro de Funcionários</li>
-                                <li>@Html.ActionLink("Funcionario", "Index", "Funcionario", new { Area = "Funcionario" }, null)</li>
-                                <li>@Html.ActionLink("Perfil", "Index", "Perfil", new { Area = "Perfil" }, null)</li>
-                                <li>@Html.ActionLink("Setor", "Index", "Setor", new { Area = "Setor" }, null)</li>
-                                <li role="separator" class="divider"></li>
-                                <li class="dropdown-header">Cadastro de Chamados</li>
-                                <li>@Html.ActionLink("Categoria", "Index", "Categoria", new { Area = "Categoria" }, null)</li>
-                                <li>@Html.ActionLink("Finalizacao", "Index", "Finalizacao", new { Area = "Finalizacao" }, null)</li>
-                            </ul>
-                        </li>
+                        @{ var perfil = Session["Perfil"]; }
+                        @if (perfil.ToString().Equals("Administrador") || perfil.ToString().Equals("Gerente") || perfil.ToString().Equals("Agente"))
+                        {
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-haspopup="true" aria-expanded="false">Cadastros<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-header">Cadastro de Funcionários</li>
+                                    <li>@Html.ActionLink("Funcionario", "Index", "Funcionario", new { Area = "Funcionario" }, null)</li>
+                                    <li>@Html.ActionLink("Perfil", "Index", "Perfil", new { Area = "Perfil" }, null)</li>
+                                    <li>@Html.ActionLink("Setor", "Index", "Setor", new { Area = "Setor" }, null)</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li class="dropdown-header">Cadastro de Chamados</li>
+                                    <li>@Html.ActionLink("Categoria", "Index", "Categoria", new { Area = "Categoria" }, null)</li>
+                                    <li>@Html.ActionLink("Finalizacao", "Index", "Finalizacao", new { Area = "Finalizacao" }, null)</li>
+                                </ul>
+                            </li>
+                        }
                     </ul>
-                    <a class="btn btn-primary navbar-btn" href="~/Chamado/Chamado/Create" role="button">Abrir Chamado</a>
+                    <a class="btn btn-primary navbar-btn" href="~/Chamado/Chamado/Create" role="button">
+                        Abrir Chamado</a>
                     <ul class="nav navbar-nav navbar-right">
-                        
-                        <li><p class="navbar-text">Seja Bem Vindo,  @Session["NomeUsuario"]!</p></li>
+                        <li>
+                            <p class="navbar-text">
+                                Seja Bem Vindo, @Session["NomeUsuario"]!</p>
+                        </li>
                         <li class="active">@Html.ActionLink("Sair", "Logoff", "Conta", new { Area = "" }, null)</li>
                     </ul>
                 </div>
                 <!--/.nav-collapse -->
             </div>
             <!--/.container-fluid -->
-            </div>
-        </nav>
-        
-        @RenderBody()
-        <!-- Main component for a primary marketing message or call to action -->
-        
-    
+        </div>
+    </nav>
+    @RenderBody()
+    <!-- Main component for a primary marketing message or call to action -->
     <!-- /container -->
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    
 </body>
 </html>
-
-
 @*<!DOCTYPE html>
 <html lang="en">
 <head>

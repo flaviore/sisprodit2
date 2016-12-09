@@ -5,13 +5,13 @@ namespace SisprodIT2.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    public sealed partial class Inicial : IMigrationMetadata
+    public sealed partial class AlteracoesChamado : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Inicial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AlteracoesChamado));
         
         string IMigrationMetadata.Id
         {
-            get { return "201611061616165_Inicial"; }
+            get { return "201612081835134_AlteracoesChamado"; }
         }
         
         string IMigrationMetadata.Source

@@ -1,0 +1,70 @@
+﻿@model SisprodIT2.Areas.Chamado.Models.ChamadoModel
+@{
+    ViewBag.Title = "Delete";
+    ViewBag.TitleSingle = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="page-header">
+        <h1>
+            Exclusão de @ViewBag.Title</h1>
+        <p>
+            Esta página é destinada ao cadastro de @ViewBag.Title. Somente administradores possuem
+            permissão para manipular os @ViewBag.Title dos usuários.
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-offset-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        <strong>Deseja excluir este @ViewBag.TitleSingle?</strong></p>
+                </div>
+            </div>
+            <dl class="dl-horizontal">
+                <dt>@Html.DisplayNameFor(model => model.Titulo)</dt>
+                <dd>@Html.DisplayFor(model => model.Titulo)</dd>
+                <dt>@Html.DisplayNameFor(model => model.Revisao)</dt>
+                <dd>@Html.DisplayFor(model => model.Revisao)</dd>
+                <dt>@Html.DisplayNameFor(model => model.Status)</dt>
+                <dd>@Html.DisplayFor(model => model.Status)</dd>
+                <dt>@Html.DisplayNameFor(model => model.Descricao)</dt>
+                <dd>@Html.DisplayFor(model => model.Descricao)</dd>
+                <dt>@Html.DisplayNameFor(model => model.CategoriaModelId)</dt>
+                <dd>@Html.DisplayFor(model => model.CategoriaModelId)</dd>
+                <dt>@Html.DisplayNameFor(model => model.FuncionarioCriadorId)</dt>
+                <dd>@Html.DisplayFor(model => model.FuncionarioCriadorId)</dd>
+                <dt>@Html.DisplayNameFor(model => model.FuncionarioResponsavelId)</dt>
+                <dd>@Html.DisplayFor(model => model.FuncionarioResponsavelId)</dd>
+                <dt>@Html.DisplayNameFor(model => model.FinalizacaoModelId)</dt>
+                <dd>@Html.DisplayFor(model => model.FinalizacaoModelId)</dd>
+                <dt>@Html.DisplayNameFor(model => model.DataCadastro)</dt>
+                <dd>@Html.DisplayFor(model => model.DataCadastro)</dd>
+                <dt>@Html.DisplayNameFor(model => model.DataAtualizacao)</dt>
+                <dd>@Html.DisplayFor(model => model.DataAtualizacao)</dd>
+                <dt>@Html.DisplayNameFor(model => model.FuncionarioAtualizadorId)</dt>
+                <dd>@Html.DisplayFor(model => model.FuncionarioAtualizadorId)</dd>
+                <dt>@Html.DisplayNameFor(model => model.Ativo)</dt>
+                <dd>@Html.DisplayFor(model => model.Ativo)</dd>
+            </dl>
+            @using (Html.BeginForm())
+            {
+                <p>
+                    <button type="submit" class="btn btn-default">
+                        Excluir</button>
+                    @Html.ActionLink("Cancelar", "Details", "Chamado", new { Area = "Chamado", id = Model.ChamadoModelId }, new { @class = "btn btn-Link" })
+                </p>
+            }
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.9.1.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+    $("#Nome").addClass("form-control");
+    $("#Sigla").addClass("form-control");
+    $("#Descricao").addClass("form-control");
+    $("#Telefone").addClass("form-control");
+    $("#Ativo").addClass("checkbox");
+
+</script>

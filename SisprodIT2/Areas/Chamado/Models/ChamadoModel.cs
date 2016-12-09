@@ -35,13 +35,14 @@ namespace SisprodIT2.Areas.Chamado.Models
         public int FuncionarioCriadorId { get; set; }
 
         [Display(Name = "Atribuido a")]
-        public int FuncionarioResponsavelId { get; set; }
+        public int? FuncionarioResponsavelId { get; set; }
 
         [Display(Name = "Cod Finalização")]
-        public int FinalizacaoModelId { get; set; }
+        public int? FinalizacaoModelId { get; set; }
 
         public virtual FuncionarioModel FuncionarioCriador { get; set; }
         public virtual FuncionarioModel FuncionarioResponsavel { get; set; }
+        public virtual FuncionarioModel FuncionarioAtualizador { get; set; }
         public virtual CategoriaModel Categoria { get; set; }
         public virtual FinalizacaoModel Finalizacao { get; set; }
         public virtual ICollection<ComentarioModel> ComentarioLista { get; set; }
@@ -49,10 +50,10 @@ namespace SisprodIT2.Areas.Chamado.Models
         public ChamadoModel()
         {
             ComentarioLista = new List<ComentarioModel>();
-            FuncionarioCriador = new FuncionarioModel();
-            FuncionarioResponsavel = new FuncionarioModel();
-            Finalizacao = new FinalizacaoModel();
-            Categoria = new CategoriaModel();
+            //FuncionarioCriador = new FuncionarioModel();
+            //FuncionarioResponsavel = new FuncionarioModel();
+            //Finalizacao = new FinalizacaoModel();
+            //Categoria = new CategoriaModel();
         }
     }
 }

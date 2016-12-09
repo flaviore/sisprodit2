@@ -10,6 +10,7 @@ using SisprodIT2.Areas.Telefone.Models;
 using SisprodIT2.Models;
 using System.ComponentModel.DataAnnotations;
 using SisprodIT2.Areas.Chamado.Models;
+using SisprodIT2.Areas.Comentario.Models;
 
 namespace SisprodIT2.Areas.Funcionario.Models
 {
@@ -49,14 +50,20 @@ namespace SisprodIT2.Areas.Funcionario.Models
         public ICollection<EmailModel> EmailLista { get; set; }
         public ICollection<EnderecoModel> EnderecoLista { get; set; }
         public ICollection<TelefoneModel> TelefoneLista { get; set; }
-        public ICollection<ChamadoModel> ChamadoLista { get; set; }
+        public ICollection<ChamadoModel> ChamadoListaCriador { get; set; }
+        public ICollection<ChamadoModel> ChamadoListaResponsavel { get; set; }
+        public ICollection<ChamadoModel> ChamadoListaAtualizador { get; set; }
+        public ICollection<ComentarioModel> ComentarioLista { get; set; }
 
         public FuncionarioModel()
         {
             TelefoneLista = new List<TelefoneModel>();
             EnderecoLista = new List<EnderecoModel>();
             EmailLista = new List<EmailModel>();
-            ChamadoLista = new List<ChamadoModel>();
+            ChamadoListaCriador = new List<ChamadoModel>();
+            ChamadoListaResponsavel = new List<ChamadoModel>();
+            ChamadoListaAtualizador = new List<ChamadoModel>();
+            ComentarioLista = new List<ComentarioModel>();
         }
     }
 }

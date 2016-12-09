@@ -20,43 +20,78 @@
                         <strong>Lista de @ViewBag.Title</strong></p>
                 </div>
             </div>
-            <table class="table table-bordered">
+            <table class="table table-bordered table-condensed">
                 <tr>
-                    <th class="col-md-4">
+                    <th class="col-md-5">
                         @Html.DisplayNameFor(model => model.Titulo)
                     </th>
                     <th class="col-md-2">
-                        @Html.DisplayNameFor(model => model.FuncionarioResponsavelId)
+                        Atribuído a:
                     </th>
-                    <th class="col-md-1">
+                    <th class="col-md-1 text-center">
                         @Html.DisplayNameFor(model => model.Status)
                     </th>
                     <th class="col-md-2">
                         @Html.DisplayNameFor(model => model.DataAtualizacao)
                     </th>
-                    <th class="col-md-2 text-center">
+                    <th class="col-md-1 text-center">
                         Ação
                     </th>
                 </tr>
                 @foreach (var item in Model)
                 {
+                    var cor = "";
+
+                    if (item.Status == "Pendente")
+                    {
+                        cor = "background-color:#F44336; color:#fff";
+                    }
+                    else if (item.Status == "Atribuido")
+                    {
+                        cor = "background-color:#2196F3; color:#fff";
+                    }
+                    else if (item.Status == "Fechado")
+                    {
+                        cor = "background-color:#EEEEEE; color:#000";
+                    }
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.Titulo)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.FuncionarioResponsavelId)
+                            @Html.DisplayFor(modelItem => item.FuncionarioResponsavel.Nome)
                         </td>
-                        <td>
+                        <td style="@cor" class="text-center">
                             @Html.DisplayFor(modelItem => item.Status)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.DataAtualizacao)
                         </td>
                         <td class="text-center">
-                            @Html.ActionLink("Editar", "Edit", "Chamado", new { Area = "Chamado", id = item.ChamadoModelId }, null)
-                          | @Html.ActionLink("Detalhes", "Details", "Chamado", new { Area = "Chamado", id = item.ChamadoModelId }, null)
-                            @*| @Html.ActionLink("Excluir", "Delete", new { id = item.ChamadoModelId })*@
+                            <div class="btn-group">
+                                <a href="~/Chamado/Chamado/Details/@item.ChamadoModelId" class="btn btn-default btn-xs">Detalhar</a>
+                                @*<button type="button" class="btn btn-default btn-xs">
+                                    Detalhar</button>*@
+                                <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <span class="caret"></span><span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                
+                                <ul class="dropdown-menu">
+                                    <li>
+                                    
+                                    <a href="~/Chamado/Chamado/Edit/@item.ChamadoModelId"  data-toggle="tooltip" data-placement="left" title="Editar">
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar Chamado </a></li>
+                                    <li>
+                                        @{ var perfil = Session["Perfil"]; }
+                                        @if (perfil.ToString().Equals("Administrador") || perfil.ToString().Equals("Gerente") || perfil.ToString().Equals("Agente"))
+                                        {
+                                            <a href="~/Chamado/Chamado/Close/@item.ChamadoModelId" data-toggle="tooltip" data-placement="left" title="Fechar Chamado">
+                                               <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>  Fechar Chamado</a>
+                                        }
+                                    </li>
+                                </ul>
+                            </div>
                         </td>
                     </tr>
                 }
@@ -64,3 +99,9 @@
         </div>
     </div>
 </div>
+<script src="~/Scripts/jquery-1.9.1.js" type="text/javascript"></script>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>

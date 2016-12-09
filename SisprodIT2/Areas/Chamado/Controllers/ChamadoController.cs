@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using SisprodIT2.Areas.Chamado.Models;
 using SisprodIT2.Map;
+using SisprodIT2.Areas.Comentario.Models;
 
 namespace SisprodIT2.Areas.Chamado.Controllers
 {
@@ -21,9 +22,8 @@ namespace SisprodIT2.Areas.Chamado.Controllers
 
         public ActionResult Index()
         {
-            var chamados = db.Chamados.Include(c => c.FuncionarioCriador).Include(c => c.Categoria).Include(c => c.Finalizacao);
-            
-            return View(chamados.ToList().OrderByDescending(x => x.DataAtualizacao));
+            var chamados = db.Chamados.Include(c => c.FuncionarioCriador).Include(c => c.FuncionarioResponsavel).Include(c => c.Categoria).Include(c => c.Finalizacao);
+            return View(chamados.ToList());
         }
 
         //
@@ -32,6 +32,12 @@ namespace SisprodIT2.Areas.Chamado.Controllers
         public ActionResult Details(int id = 0)
         {
             ChamadoModel chamadomodel = db.Chamados.Find(id);
+            chamadomodel.Categoria = db.Categorias.Find(chamadomodel.CategoriaModelId);
+            chamadomodel.FuncionarioCriador = db.Funcionarios.Find(chamadomodel.FuncionarioCriadorId);
+            chamadomodel.FuncionarioResponsavel = db.Funcionarios.Find(chamadomodel.FuncionarioResponsavelId);
+            chamadomodel.FuncionarioAtualizador = db.Funcionarios.Find(chamadomodel.FuncionarioAtualizadorId);
+            chamadomodel.Finalizacao = db.Finalizacoes.Find(chamadomodel.FinalizacaoModelId);
+            chamadomodel.ComentarioLista = db.Comentarios.ToList<ComentarioModel>().Where(x => x.ChamadoModelId == chamadomodel.ChamadoModelId).ToList();
             if (chamadomodel == null)
             {
                 return HttpNotFound();
@@ -44,11 +50,14 @@ namespace SisprodIT2.Areas.Chamado.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.FuncionarioResponsavelId = new SelectList(db.Funcionarios, "FuncionarioModelId", "Nome");
-            ViewBag.CategoriaModelId = new SelectList(db.Categorias.OrderBy(x => x.Descricao), "CategoriaModelId", "Descricao");
-            //ViewBag.FinalizacaoModelId = new SelectList(db.Finalizacoes, "FinalizacaoModelId", "Descricao");
             ViewBag.FuncionarioModelId = Session["FuncionarioModelId"];
-            ViewBag.FinalizacaoModelId = db.Finalizacoes.Min(x => x.FinalizacaoModelId);
+            ViewBag.FuncionarioCriadorId = new SelectList(db.Funcionarios, "FuncionarioModelId", "Nome");
+            //ViewBag.FuncionarioResponsavelId = new SelectList(db.Funcionarios, "FuncionarioModelId", "Nome");
+            ViewBag.FuncionarioResponsavelId = new SelectList(db.Funcionarios.Where(b => new[] { "Administrador", "Gerente", "Agente" }.Contains(b.Perfil.Descricao)), "FuncionarioModelId", "Nome");
+            ViewBag.CategoriaModelId = new SelectList(db.Categorias, "CategoriaModelId", "Descricao");
+            ViewBag.FinalizacaoModelId = new SelectList(db.Finalizacoes, "FinalizacaoModelId", "Descricao");
+            ViewBag.Revisao = 1;
+            ViewBag.Status = "Pendente";
             return View();
         }
 
@@ -65,7 +74,9 @@ namespace SisprodIT2.Areas.Chamado.Controllers
                 return RedirectToAction("Index", "Home", new { Area = "" });
             }
 
-            ViewBag.FuncionarioResponsavelId = new SelectList(db.Funcionarios, "FuncionarioModelId", "Nome", chamadomodel.FuncionarioResponsavelId);
+            ViewBag.FuncionarioCriadorId = new SelectList(db.Funcionarios, "FuncionarioModelId", "Nome", chamadomodel.FuncionarioCriadorId);
+            //ViewBag.FuncionarioResponsavelId = new SelectList(db.Funcionarios, "FuncionarioModelId", "Nome", chamadomodel.FuncionarioResponsavelId);
+            ViewBag.FuncionarioResponsavelId = new SelectList(db.Funcionarios.Where(b => new[] { "Administrador", "Gerente", "Agente" }.Contains(b.Perfil.Descricao)), "FuncionarioModelId", "Nome");
             ViewBag.CategoriaModelId = new SelectList(db.Categorias, "CategoriaModelId", "Descricao", chamadomodel.CategoriaModelId);
             ViewBag.FinalizacaoModelId = new SelectList(db.Finalizacoes, "FinalizacaoModelId", "Descricao", chamadomodel.FinalizacaoModelId);
             return View(chamadomodel);
@@ -81,7 +92,11 @@ namespace SisprodIT2.Areas.Chamado.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.FuncionarioResponsavelId = new SelectList(db.Funcionarios, "FuncionarioModelId", "Nome", chamadomodel.FuncionarioResponsavelId);
+            ViewBag.Revisao = chamadomodel.Revisao;
+            ViewBag.FuncionarioModelId = Session["FuncionarioModelId"];
+            ViewBag.FuncionarioCriadorId = new SelectList(db.Funcionarios, "FuncionarioModelId", "Nome", chamadomodel.FuncionarioCriadorId);
+            //ViewBag.FuncionarioResponsavelId = new SelectList(db.Funcionarios, "FuncionarioModelId", "Nome", chamadomodel.FuncionarioResponsavelId);
+            ViewBag.FuncionarioResponsavelId = new SelectList(db.Funcionarios.Where(b => new[] { "Administrador", "Gerente", "Agente" }.Contains(b.Perfil.Descricao)), "FuncionarioModelId", "Nome", chamadomodel.FuncionarioResponsavelId);
             ViewBag.CategoriaModelId = new SelectList(db.Categorias, "CategoriaModelId", "Descricao", chamadomodel.CategoriaModelId);
             ViewBag.FinalizacaoModelId = new SelectList(db.Finalizacoes, "FinalizacaoModelId", "Descricao", chamadomodel.FinalizacaoModelId);
             return View(chamadomodel);
@@ -95,11 +110,18 @@ namespace SisprodIT2.Areas.Chamado.Controllers
         {
             if (ModelState.IsValid)
             {
+                chamadomodel.Revisao = chamadomodel.Revisao + 1;
+                chamadomodel.Status = "Atribuido";
                 db.Entry(chamadomodel).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home", new { Area = "" });
             }
-            ViewBag.FuncionarioResponsavelId = new SelectList(db.Funcionarios, "FuncionarioModelId", "Nome", chamadomodel.FuncionarioResponsavelId);
+
+            ViewBag.Revisao = chamadomodel.Revisao;
+            ViewBag.FuncionarioModelId = Session["FuncionarioModelId"];
+            ViewBag.FuncionarioCriadorId = new SelectList(db.Funcionarios, "FuncionarioModelId", "Nome", chamadomodel.FuncionarioCriadorId);
+            //ViewBag.FuncionarioResponsavelId = new SelectList(db.Funcionarios, "FuncionarioModelId", "Nome", chamadomodel.FuncionarioResponsavelId);
+            ViewBag.FuncionarioResponsavelId = new SelectList(db.Funcionarios.Where(b => new[] { "Administrador", "Gerente", "Agente" }.Contains(b.Perfil.Descricao)), "FuncionarioModelId", "Nome", chamadomodel.FuncionarioResponsavelId);
             ViewBag.CategoriaModelId = new SelectList(db.Categorias, "CategoriaModelId", "Descricao", chamadomodel.CategoriaModelId);
             ViewBag.FinalizacaoModelId = new SelectList(db.Finalizacoes, "FinalizacaoModelId", "Descricao", chamadomodel.FinalizacaoModelId);
             return View(chamadomodel);
@@ -128,6 +150,59 @@ namespace SisprodIT2.Areas.Chamado.Controllers
             db.Chamados.Remove(chamadomodel);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Close(int id = 0)
+        {
+            var chamadomodel = db.Chamados.Find(id);
+            if (chamadomodel == null)
+            {
+                return HttpNotFound();
+            }
+
+            chamadomodel.Categoria = db.Categorias.Find(chamadomodel.CategoriaModelId);
+            chamadomodel.FuncionarioCriador = db.Funcionarios.Find(chamadomodel.FuncionarioCriadorId);
+            chamadomodel.FuncionarioResponsavel = db.Funcionarios.Find(chamadomodel.FuncionarioResponsavelId);
+            chamadomodel.FuncionarioAtualizador = db.Funcionarios.Find(chamadomodel.FuncionarioAtualizadorId);
+
+            ViewBag.Revisao = chamadomodel.Revisao;
+            ViewBag.FuncionarioModelId = Session["FuncionarioModelId"];
+            ViewBag.FuncionarioCriadorId = new SelectList(db.Funcionarios, "FuncionarioModelId", "Nome", chamadomodel.FuncionarioCriadorId);
+            //ViewBag.FuncionarioResponsavelId = new SelectList(db.Funcionarios, "FuncionarioModelId", "Nome", chamadomodel.FuncionarioResponsavelId);
+            ViewBag.FuncionarioResponsavelId = new SelectList(db.Funcionarios.Where(b => new[] { "Administrador", "Gerente", "Agente" }.Contains(b.Perfil.Descricao)), "FuncionarioModelId", "Nome", chamadomodel.FuncionarioResponsavelId);
+            ViewBag.CategoriaModelId = new SelectList(db.Categorias, "CategoriaModelId", "Descricao", chamadomodel.CategoriaModelId);
+            ViewBag.FinalizacaoModelId = new SelectList(db.Finalizacoes, "FinalizacaoModelId", "Descricao", chamadomodel.FinalizacaoModelId);
+            return View(chamadomodel);
+        }
+
+
+        [HttpPost, ActionName("Close")]
+        public ActionResult CloseConfirmed(ChamadoModel chamadomodel)
+        {
+
+
+            if (ModelState.IsValid)
+            {
+                chamadomodel.Categoria = db.Categorias.Find(chamadomodel.CategoriaModelId);
+                chamadomodel.FuncionarioCriador = db.Funcionarios.Find(chamadomodel.FuncionarioCriadorId);
+                chamadomodel.FuncionarioResponsavel = db.Funcionarios.Find(chamadomodel.FuncionarioResponsavelId);
+                chamadomodel.FuncionarioAtualizador = db.Funcionarios.Find(chamadomodel.FuncionarioAtualizadorId);
+
+                chamadomodel.Revisao = chamadomodel.Revisao + 1;
+                chamadomodel.Status = "Fechado";
+                db.Entry(chamadomodel).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home", new { Area = "" });
+            }
+
+            ViewBag.Revisao = chamadomodel.Revisao;
+            ViewBag.FuncionarioModelId = Session["FuncionarioModelId"];
+            ViewBag.FuncionarioCriadorId = new SelectList(db.Funcionarios, "FuncionarioModelId", "Nome", chamadomodel.FuncionarioCriadorId);
+            //ViewBag.FuncionarioResponsavelId = new SelectList(db.Funcionarios, "FuncionarioModelId", "Nome", chamadomodel.FuncionarioResponsavelId);
+            ViewBag.FuncionarioResponsavelId = new SelectList(db.Funcionarios.Where(b => new[] { "Administrador", "Gerente", "Agente" }.Contains(b.Perfil.Descricao)), "FuncionarioModelId", "Nome", chamadomodel.FuncionarioResponsavelId);
+            ViewBag.CategoriaModelId = new SelectList(db.Categorias, "CategoriaModelId", "Descricao", chamadomodel.CategoriaModelId);
+            ViewBag.FinalizacaoModelId = new SelectList(db.Finalizacoes, "FinalizacaoModelId", "Descricao", chamadomodel.FinalizacaoModelId);
+            return View(chamadomodel);
         }
 
         protected override void Dispose(bool disposing)

@@ -104,15 +104,7 @@ if (pkName != null) {
 
 
 <script src="~/Scripts/jquery-1.9.1.js" type="text/javascript"></script>
-<script type="text/javascript">
 
-    $("#Nome").addClass("form-control");
-    $("#Sigla").addClass("form-control");
-    $("#Descricao").addClass("form-control");
-    $("#Telefone").addClass("form-control");
-    $("#Ativo").addClass("checkbox");
-
-</script>
 <#
 if(!mvcHost.IsPartialView && !mvcHost.IsContentPage) {
     ClearIndent();

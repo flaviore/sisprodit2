@@ -9,6 +9,7 @@ using SisprodIT2.Areas.Perfil.Models;
 using SisprodIT2.Areas.Telefone.Models;
 using SisprodIT2.Areas.Endereco.Models;
 using SisprodIT2.Areas.Email.Models;
+using SisprodIT2.Models;
 using SisprodIT2.Areas.Funcionario.Models;
 using SisprodIT2.Areas.Categoria.Models;
 using SisprodIT2.Areas.Finalizacao.Models;

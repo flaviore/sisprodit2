@@ -57,6 +57,7 @@ namespace SisprodIT2.Controllers
         {
             Session["NomeUsuario"] = null;
             Session["FuncionarioModelId"] = null;
+            Session["Perfil"] = null;
         }
 
     }

@@ -129,6 +129,7 @@
     <Compile Include="Areas\Chamado\Controllers\ChamadoController.cs" />
     <Compile Include="Areas\Chamado\Models\ChamadoModel.cs" />
     <Compile Include="Areas\Comentario\ComentarioAreaRegistration.cs" />
+    <Compile Include="Areas\Comentario\Controllers\ComentarioController.cs" />
     <Compile Include="Areas\Comentario\Models\ComentarioModel.cs" />
     <Compile Include="Areas\Email\Controllers\EmailController.cs" />
     <Compile Include="Areas\Email\EmailAreaRegistration.cs" />
@@ -167,21 +168,21 @@
     <Compile Include="Map\PerfilMap.cs" />
     <Compile Include="Map\SetorMap.cs" />
     <Compile Include="Map\TelefoneMap.cs" />
-    <Compile Include="Migrations\201611061616165_Inicial.cs" />
-    <Compile Include="Migrations\201611061616165_Inicial.Designer.cs">
-      <DependentUpon>201611061616165_Inicial.cs</DependentUpon>
+    <Compile Include="Migrations\201612062002111_inicial.cs" />
+    <Compile Include="Migrations\201612062002111_inicial.Designer.cs">
+      <DependentUpon>201612062002111_inicial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612020233508_TabelasChamados.cs" />
-    <Compile Include="Migrations\201612020233508_TabelasChamados.Designer.cs">
-      <DependentUpon>201612020233508_TabelasChamados.cs</DependentUpon>
+    <Compile Include="Migrations\201612071957213_ChamadoModelAlterado.cs" />
+    <Compile Include="Migrations\201612071957213_ChamadoModelAlterado.Designer.cs">
+      <DependentUpon>201612071957213_ChamadoModelAlterado.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612040232535_FuncionarioResponsavel.cs" />
-    <Compile Include="Migrations\201612040232535_FuncionarioResponsavel.Designer.cs">
-      <DependentUpon>201612040232535_FuncionarioResponsavel.cs</DependentUpon>
+    <Compile Include="Migrations\201612081835134_AlteracoesChamado.cs" />
+    <Compile Include="Migrations\201612081835134_AlteracoesChamado.Designer.cs">
+      <DependentUpon>201612081835134_AlteracoesChamado.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612041712334_RemovidoFinalizacaoRequerido.cs" />
-    <Compile Include="Migrations\201612041712334_RemovidoFinalizacaoRequerido.Designer.cs">
-      <DependentUpon>201612041712334_RemovidoFinalizacaoRequerido.cs</DependentUpon>
+    <Compile Include="Migrations\201612082041252_AlteracoesComentarios.cs" />
+    <Compile Include="Migrations\201612082041252_AlteracoesComentarios.Designer.cs">
+      <DependentUpon>201612082041252_AlteracoesComentarios.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseCadastro.cs" />
@@ -314,7 +315,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Categoria\Views\Shared\" />
     <Folder Include="Areas\Chamado\Views\Shared\" />
-    <Folder Include="Areas\Comentario\Controllers\" />
     <Folder Include="Areas\Comentario\Views\Shared\" />
     <Folder Include="Areas\Email\Views\Shared\" />
     <Folder Include="Areas\Endereco\Views\Endereco\" />
@@ -348,20 +348,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Telefone\Views\Web.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611061616165_Inicial.resx">
-      <DependentUpon>201611061616165_Inicial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612020233508_TabelasChamados.resx">
-      <DependentUpon>201612020233508_TabelasChamados.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612040232535_FuncionarioResponsavel.resx">
-      <DependentUpon>201612040232535_FuncionarioResponsavel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612041712334_RemovidoFinalizacaoRequerido.resx">
-      <DependentUpon>201612041712334_RemovidoFinalizacaoRequerido.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Setor\Views\Setor\Index.cshtml" />
@@ -430,8 +416,14 @@
     <Content Include="Areas\Finalizacao\Views\Finalizacao\Create.cshtml" />
     <Content Include="Areas\Finalizacao\Views\Finalizacao\Edit.cshtml" />
     <Content Include="Areas\Finalizacao\Views\Finalizacao\Delete.cshtml" />
-    <Content Include="Areas\Chamado\Views\Chamado\Index.cshtml" />
     <Content Include="Areas\Chamado\Views\Chamado\Create.cshtml" />
+    <Content Include="Areas\Chamado\Views\Chamado\Edit.cshtml" />
+    <Content Include="Areas\Chamado\Views\Chamado\Details.cshtml" />
+    <Content Include="Areas\Comentario\Views\Comentario\Create.cshtml" />
+    <Content Include="Areas\Comentario\Views\Comentario\Edit.cshtml" />
+    <Content Include="Areas\Chamado\Views\Chamado\Close.cshtml" />
+    <Content Include="Areas\Chamado\Views\Chamado\Delete.cshtml" />
+    <Content Include="Areas\Comentario\Views\Comentario\Delete.cshtml" />
     <None Include="CodeTemplates\AddView\CSHTML\Listar.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Listar.cshtml</LastGenOutput>
@@ -517,6 +509,20 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201612062002111_inicial.resx">
+      <DependentUpon>201612062002111_inicial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612071957213_ChamadoModelAlterado.resx">
+      <DependentUpon>201612071957213_ChamadoModelAlterado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612081835134_AlteracoesChamado.resx">
+      <DependentUpon>201612081835134_AlteracoesChamado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612082041252_AlteracoesComentarios.resx">
+      <DependentUpon>201612082041252_AlteracoesComentarios.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -533,7 +539,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>7817</DevelopmentServerPort>
+          <DevelopmentServerPort>2197</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
