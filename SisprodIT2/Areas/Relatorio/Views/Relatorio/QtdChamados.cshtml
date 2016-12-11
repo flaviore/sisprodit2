@@ -1,0 +1,62 @@
+﻿@model DotNet.Highcharts.Highcharts
+@using SisprodIT2.Areas.Relatorio.Models
+@{
+    ViewBag.Title = "QtdChamados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-1.9.1.js" type="text/javascript"></script>
+<script src="~/js/highcharts.js" type="text/javascript"></script>
+</script>
+<div class="container">
+    <div class="page-header">
+        <h1>
+            Quantitativo de Chamados</h1>
+        <p>
+            Este relatório refere-se aos chamados abertos.
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div>
+                        @(Model)
+                    </div>
+                    <div>
+                        <table class="table table-bordered">
+                            <tr class="active">
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Total
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Atribuídos
+                                </td>
+                                <td>@ViewBag.Atribuidos
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Pendentes
+                                </td>
+                                <td>@ViewBag.Pendentes
+                                </td>
+                            </tr>
+                            <tr class="active">
+                                <td>
+                                    <b>Total</b>
+                                </td>
+                                <td>@ViewBag.Total
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

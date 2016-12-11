@@ -62,6 +62,17 @@
                                 </ul>
                             </li>
                         }
+                        @if (perfil.ToString().Equals("Administrador") || perfil.ToString().Equals("Gerente") || perfil.ToString().Equals("Agente"))
+                        {
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-haspopup="true" aria-expanded="false">Relatórios<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Qtd Chamados", "QtdChamados", "Relatorio", new { Area = "Relatorio" }, null)</li>
+                                    <li>@Html.ActionLink("Qtd Atendimento Usuário", "QtdAtendimentoUsuario", "Relatorio", new { Area = "Relatorio" }, null)</li>
+                                    
+                                </ul>
+                            </li>
+                        }
                     </ul>
                     <a class="btn btn-primary navbar-btn" href="~/Chamado/Chamado/Create" role="button">
                         Abrir Chamado</a>
@@ -84,6 +95,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @*@Scripts.Render("~/bundles/Highcharts")*@
 </body>
 </html>
 @*<!DOCTYPE html>

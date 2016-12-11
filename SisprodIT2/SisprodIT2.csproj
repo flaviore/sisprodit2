@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotNet.Highcharts, Version=2.0.0.0, Culture=neutral, PublicKeyToken=88854f873df851bf, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNet.Highcharts.2.0\lib\DotNet.Highcharts.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -146,6 +150,9 @@
     <Compile Include="Areas\Funcionario\FuncionarioAreaRegistration.cs" />
     <Compile Include="Areas\Funcionario\Models\FuncionarioModel.cs" />
     <Compile Include="Areas\Perfil\PerfilAreaRegistration.cs" />
+    <Compile Include="Areas\Relatorio\Controllers\RelatorioController.cs" />
+    <Compile Include="Areas\Relatorio\Models\QtdChamado.cs" />
+    <Compile Include="Areas\Relatorio\RelatorioAreaRegistration.cs" />
     <Compile Include="Areas\Setor\Controllers\SetorController.cs" />
     <Compile Include="Areas\Setor\Models\SetorModel.cs" />
     <Compile Include="Areas\Setor\SetorAreaRegistration.cs" />
@@ -266,6 +273,115 @@
     <Content Include="Images\orderedList7.png" />
     <Content Include="Images\orderedList8.png" />
     <Content Include="Images\orderedList9.png" />
+    <Content Include="js\highcharts-3d.js" />
+    <Content Include="js\highcharts-3d.src.js" />
+    <Content Include="js\highcharts-more.js" />
+    <Content Include="js\highcharts-more.src.js" />
+    <Content Include="js\highcharts.js" />
+    <Content Include="js\highcharts.src.js" />
+    <Content Include="js\js\highcharts-3d.js" />
+    <Content Include="js\js\highcharts-3d.src.js" />
+    <Content Include="js\js\highcharts-more.js" />
+    <Content Include="js\js\highcharts-more.src.js" />
+    <Content Include="js\js\highcharts.js" />
+    <Content Include="js\js\highcharts.src.js" />
+    <Content Include="js\js\modules\accessibility.js" />
+    <Content Include="js\js\modules\accessibility.src.js" />
+    <Content Include="js\js\modules\annotations.js" />
+    <Content Include="js\js\modules\annotations.src.js" />
+    <Content Include="js\js\modules\boost.js" />
+    <Content Include="js\js\modules\boost.src.js" />
+    <Content Include="js\js\modules\broken-axis.js" />
+    <Content Include="js\js\modules\broken-axis.src.js" />
+    <Content Include="js\js\modules\data.js" />
+    <Content Include="js\js\modules\data.src.js" />
+    <Content Include="js\js\modules\drilldown.js" />
+    <Content Include="js\js\modules\drilldown.src.js" />
+    <Content Include="js\js\modules\exporting.js" />
+    <Content Include="js\js\modules\exporting.src.js" />
+    <Content Include="js\js\modules\funnel.js" />
+    <Content Include="js\js\modules\funnel.src.js" />
+    <Content Include="js\js\modules\gantt.js" />
+    <Content Include="js\js\modules\gantt.src.js" />
+    <Content Include="js\js\modules\grid-axis.js" />
+    <Content Include="js\js\modules\grid-axis.src.js" />
+    <Content Include="js\js\modules\heatmap.js" />
+    <Content Include="js\js\modules\heatmap.src.js" />
+    <Content Include="js\js\modules\no-data-to-display.js" />
+    <Content Include="js\js\modules\no-data-to-display.src.js" />
+    <Content Include="js\js\modules\offline-exporting.js" />
+    <Content Include="js\js\modules\offline-exporting.src.js" />
+    <Content Include="js\js\modules\overlapping-datalabels.js" />
+    <Content Include="js\js\modules\overlapping-datalabels.src.js" />
+    <Content Include="js\js\modules\series-label.js" />
+    <Content Include="js\js\modules\series-label.src.js" />
+    <Content Include="js\js\modules\solid-gauge.js" />
+    <Content Include="js\js\modules\solid-gauge.src.js" />
+    <Content Include="js\js\modules\treemap.js" />
+    <Content Include="js\js\modules\treemap.src.js" />
+    <Content Include="js\js\modules\xrange-series.js" />
+    <Content Include="js\js\modules\xrange-series.src.js" />
+    <Content Include="js\js\themes\dark-blue.js" />
+    <Content Include="js\js\themes\dark-green.js" />
+    <Content Include="js\js\themes\dark-unica.js" />
+    <Content Include="js\js\themes\gray.js" />
+    <Content Include="js\js\themes\grid-light.js" />
+    <Content Include="js\js\themes\grid.js" />
+    <Content Include="js\js\themes\sand-signika.js" />
+    <Content Include="js\js\themes\skies.js" />
+    <Content Include="js\lib\canvg.js" />
+    <Content Include="js\lib\canvg.src.js" />
+    <Content Include="js\lib\jspdf.js" />
+    <Content Include="js\lib\jspdf.src.js" />
+    <Content Include="js\lib\rgbcolor.js" />
+    <Content Include="js\lib\rgbcolor.src.js" />
+    <Content Include="js\lib\svg2pdf.js" />
+    <Content Include="js\lib\svg2pdf.src.js" />
+    <Content Include="js\modules\accessibility.js" />
+    <Content Include="js\modules\accessibility.src.js" />
+    <Content Include="js\modules\annotations.js" />
+    <Content Include="js\modules\annotations.src.js" />
+    <Content Include="js\modules\boost.js" />
+    <Content Include="js\modules\boost.src.js" />
+    <Content Include="js\modules\broken-axis.js" />
+    <Content Include="js\modules\broken-axis.src.js" />
+    <Content Include="js\modules\data.js" />
+    <Content Include="js\modules\data.src.js" />
+    <Content Include="js\modules\drilldown.js" />
+    <Content Include="js\modules\drilldown.src.js" />
+    <Content Include="js\modules\exporting.js" />
+    <Content Include="js\modules\exporting.src.js" />
+    <Content Include="js\modules\funnel.js" />
+    <Content Include="js\modules\funnel.src.js" />
+    <Content Include="js\modules\gantt.js" />
+    <Content Include="js\modules\gantt.src.js" />
+    <Content Include="js\modules\grid-axis.js" />
+    <Content Include="js\modules\grid-axis.src.js" />
+    <Content Include="js\modules\heatmap.js" />
+    <Content Include="js\modules\heatmap.src.js" />
+    <Content Include="js\modules\no-data-to-display.js" />
+    <Content Include="js\modules\no-data-to-display.src.js" />
+    <Content Include="js\modules\offline-exporting.js" />
+    <Content Include="js\modules\offline-exporting.src.js" />
+    <Content Include="js\modules\overlapping-datalabels.js" />
+    <Content Include="js\modules\overlapping-datalabels.src.js" />
+    <Content Include="js\modules\series-label.js" />
+    <Content Include="js\modules\series-label.src.js" />
+    <Content Include="js\modules\solid-gauge.js" />
+    <Content Include="js\modules\solid-gauge.src.js" />
+    <Content Include="js\modules\treemap.js" />
+    <Content Include="js\modules\treemap.src.js" />
+    <Content Include="js\modules\xrange-series.js" />
+    <Content Include="js\modules\xrange-series.src.js" />
+    <Content Include="js\readme.txt" />
+    <Content Include="js\themes\dark-blue.js" />
+    <Content Include="js\themes\dark-green.js" />
+    <Content Include="js\themes\dark-unica.js" />
+    <Content Include="js\themes\gray.js" />
+    <Content Include="js\themes\grid-light.js" />
+    <Content Include="js\themes\grid.js" />
+    <Content Include="js\themes\sand-signika.js" />
+    <Content Include="js\themes\skies.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\cldr.js" />
@@ -280,6 +396,26 @@
     <Content Include="Scripts\globalize\plural.js" />
     <Content Include="Scripts\globalize\relative-time.js" />
     <Content Include="Scripts\globalize\unit.js" />
+    <Content Include="Scripts\Highcharts-3.0.1\js\adapters\mootools-adapter.js" />
+    <Content Include="Scripts\Highcharts-3.0.1\js\adapters\mootools-adapter.src.js" />
+    <Content Include="Scripts\Highcharts-3.0.1\js\adapters\prototype-adapter.js" />
+    <Content Include="Scripts\Highcharts-3.0.1\js\adapters\prototype-adapter.src.js" />
+    <Content Include="Scripts\Highcharts-3.0.1\js\highcharts-more.js" />
+    <Content Include="Scripts\Highcharts-3.0.1\js\highcharts.js" />
+    <Content Include="Scripts\Highcharts-3.0.1\js\highcharts.src.js" />
+    <Content Include="Scripts\Highcharts-3.0.1\js\modules\canvas-tools.js" />
+    <Content Include="Scripts\Highcharts-3.0.1\js\modules\canvas-tools.src.js" />
+    <Content Include="Scripts\Highcharts-3.0.1\js\modules\data.js" />
+    <Content Include="Scripts\Highcharts-3.0.1\js\modules\data.src.js" />
+    <Content Include="Scripts\Highcharts-3.0.1\js\modules\exporting.js" />
+    <Content Include="Scripts\Highcharts-3.0.1\js\modules\exporting.src.js" />
+    <Content Include="Scripts\Highcharts-3.0.1\js\modules\funnel.js" />
+    <Content Include="Scripts\Highcharts-3.0.1\js\modules\funnel.src.js" />
+    <Content Include="Scripts\Highcharts-3.0.1\js\themes\dark-blue.js" />
+    <Content Include="Scripts\Highcharts-3.0.1\js\themes\dark-green.js" />
+    <Content Include="Scripts\Highcharts-3.0.1\js\themes\gray.js" />
+    <Content Include="Scripts\Highcharts-3.0.1\js\themes\grid.js" />
+    <Content Include="Scripts\Highcharts-3.0.1\js\themes\skies.js" />
     <Content Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -322,6 +458,7 @@
     <Folder Include="Areas\Finalizacao\Views\Shared\" />
     <Folder Include="Areas\Funcionario\Views\Shared\" />
     <Folder Include="Areas\Perfil\Views\Shared\" />
+    <Folder Include="Areas\Relatorio\Views\Shared\" />
     <Folder Include="Areas\Setor\Views\Shared\" />
     <Folder Include="Areas\Telefone\Views\Shared\" />
   </ItemGroup>
@@ -424,6 +561,9 @@
     <Content Include="Areas\Chamado\Views\Chamado\Close.cshtml" />
     <Content Include="Areas\Chamado\Views\Chamado\Delete.cshtml" />
     <Content Include="Areas\Comentario\Views\Comentario\Delete.cshtml" />
+    <Content Include="Areas\Relatorio\Views\Web.config" />
+    <Content Include="Areas\Relatorio\Views\Relatorio\QtdChamados.cshtml" />
+    <Content Include="Areas\Relatorio\Views\Relatorio\QtdAtendimentoUsuario.cshtml" />
     <None Include="CodeTemplates\AddView\CSHTML\Listar.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Listar.cshtml</LastGenOutput>
@@ -505,6 +645,7 @@
     <Content Include="Views\Conta\Login.cshtml" />
     <Content Include="Views\Shared\EditorTemplate\DateTime.cshtml" />
     <Content Include="Views\Shared\SemPermissao.cshtml" />
+    <Content Include="Views\Home\TesteGrafico.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

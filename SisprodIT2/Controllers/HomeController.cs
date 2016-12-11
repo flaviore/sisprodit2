@@ -30,5 +30,10 @@ namespace SisprodIT2.Controllers
             return View("~/Views/Shared/SemPermissao.cshtml");
         }
 
+        public ActionResult TesteGrafico()
+        {
+            return View();
+        }
+
     }
 }
