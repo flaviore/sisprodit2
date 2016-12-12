@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "QtdAtendimentoUsuario";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 <script src="~/Scripts/jquery-1.9.1.js" type="text/javascript"></script>
@@ -12,7 +13,7 @@
 <div class="container">
     <div class="page-header">
         <h1>
-            Quantitativo de Chamados</h1>
+            Quantitativo de Chamados Atendidos por Usuários</h1>
         <p>
             Este relatório refere-se aos chamados abertos.
         </p>
@@ -25,34 +26,37 @@
                         @(Model)
                     </div>
                     <div>
+
+                    
                         <table class="table table-bordered">
                             <tr class="active">
                                 <th>
-                                    Status
+                                    Nome
                                 </th>
                                 <th>
                                     Total
                                 </th>
                             </tr>
-                            <tr>
+                            @{ int somatorio = 0; }
+                            @foreach (var item in ViewBag.Usuarios)
+                            {
+                                <tr>
                                 <td>
-                                    Atribuídos
+                                    @item.usuario
                                 </td>
-                                <td>@ViewBag.Atribuidos
+                                <td>
+                                    @item.total
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    Pendentes
-                                </td>
-                                <td>@ViewBag.Pendentes
-                                </td>
-                            </tr>
+                                somatorio = somatorio + item.total;
+                            }
+                            
                             <tr class="active">
                                 <td>
                                     <b>Total</b>
                                 </td>
-                                <td>@ViewBag.Total
+                                <td>
+                                    @somatorio
                                 </td>
                             </tr>
                         </table>
@@ -62,3 +66,4 @@
         </div>
     </div>
 </div>
+

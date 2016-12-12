@@ -11,6 +11,7 @@ using DotNet.Highcharts;
 using System.Drawing;
 using Point = DotNet.Highcharts.Options.Point;
 using SisprodIT2.Map;
+using SisprodIT2.Areas.Funcionario.Models;
 
 namespace SisprodIT2.Areas.Relatorio.Controllers
 {
@@ -80,54 +81,99 @@ namespace SisprodIT2.Areas.Relatorio.Controllers
 
         public ActionResult QtdAtendimentoUsuario()
         {
-            Highcharts chart = new Highcharts("chart")
-                .InitChart(new Chart { DefaultSeriesType = ChartTypes.Bar })
-                .SetTitle(new Title { Text = "Historic World Population by Region" })
-                .SetSubtitle(new Subtitle { Text = "Source: Wikipedia.org" })
-                .SetXAxis(new XAxis
+            DataContext db2 = new DataContext();
+            var usuarios = db.Funcionarios.Where(b => new[] { "Administrador", "Gerente", "Agente" }.Contains(b.Perfil.Descricao));
+            List<int> count = new List<int>();
+
+            List<QtdAtendimentoUsuarioViewModel> QtdAtendimentoUsuario = new List<QtdAtendimentoUsuarioViewModel>();
+
+            foreach (var item in usuarios)
+            {
+                int totalChamados = db2.Chamados.Where(x => x.FuncionarioCriadorId == item.FuncionarioModelId).Count();
+                count.Add(totalChamados);
+
+                QtdAtendimentoUsuario.Add(new QtdAtendimentoUsuarioViewModel() { usuario = item.Nome, total = totalChamados});
+            }
+
+            object[] total = count.Select(x => (object)x).ToArray();
+
+            // Passando os usuarios e totais para a View
+            ViewBag.Usuarios = QtdAtendimentoUsuario;
+
+
+            // Iniciando o gráfico
+            Highcharts chart = new Highcharts("chart");
+
+            chart.InitChart(new Chart
                 {
-                    Categories = new[] { "Africa", "America", "Asia", "Europe", "Oceania" },
+                    DefaultSeriesType = ChartTypes.Bar,
+                    BorderWidth = 1,
+                    BorderColor = Color.LightGray
+                });
+            
+            chart.SetTitle(new Title { Text = "Quantitativo de chamados criados por usuários" });
+            
+            chart.SetSubtitle(new Subtitle { Text = "" });
+            
+            chart.SetXAxis(new XAxis
+                {
+                    Categories = usuarios.Select(u => u.Nome).ToArray(),
+                    //Categories = new string[] { "A", "B", "C" },
                     Title = new XAxisTitle { Text = string.Empty }
-                })
-                .SetYAxis(new YAxis
+
+                });
+            
+            chart.SetYAxis(new YAxis
                 {
                     Min = 0,
                     Title = new YAxisTitle
                     {
-                        Text = "Population (millions)",
+                        Text = "Chamados (total)",
                         Align = AxisTitleAligns.High
                     }
-                })
-                .SetTooltip(new Tooltip { Formatter = "function() { return ''+ this.series.name +': '+ this.y +' millions'; }" })
-                .SetPlotOptions(new PlotOptions
+                });
+            
+            chart.SetTooltip(new Tooltip { Formatter = "function() { return ''+ this.series.name +': '+ this.y +' chamados'; }" });
+            
+            chart.SetPlotOptions(new PlotOptions
                 {
                     Bar = new PlotOptionsBar
                     {
                         DataLabels = new PlotOptionsBarDataLabels { Enabled = true }
                     }
-                })
-                .SetLegend(new Legend
+                });
+            
+            chart.SetLegend(new Legend
                 {
                     Layout = Layouts.Vertical,
                     Align = HorizontalAligns.Right,
                     VerticalAlign = VerticalAligns.Top,
-                    X = -100,
-                    Y = 100,
+                    X = -30,
+                    Y = 30,
                     Floating = true,
                     BorderWidth = 1,
                     BackgroundColor = new BackColorOrGradient(ColorTranslator.FromHtml("#FFFFFF")),
                     Shadow = true
-                })
-                .SetCredits(new Credits { Enabled = false })
-                .SetSeries(new[]
-                {
-                    new Series { Name = "Year 1800", Data = new Data(new object[] { 107, 31, 635, 203, 2 }) },
-                    new Series { Name = "Year 1900", Data = new Data(new object[] { 133, 156, 947, 408, 6 }) },
-                    new Series { Name = "Year 2008", Data = new Data(new object[] { 973, 914, 4054, 732, 34 }) }
                 });
+            
+            chart.SetCredits(new Credits { Enabled = false });
+
+            
+            chart.SetSeries(new[]{
+                //new Series { Name = "Ocorrências", Data = new Data(new object[] {total.ToArray()})}
+                new Series { Name = "Ocorrências", Data = new Data(total)}
+            });
+
+            //chart.SetSeries(series.Select(s => new Series { Type = s.Type, Name = s.Name, Data = s.Data }).ToArray());
+
+            //chart.SetSeries(new[]
+            //{
+            //    //series.Select(s => (object)new Series { Name = s.Name, Data = s.Data}).ToArray()
+            //    new Series { Name = "Year 1800", Data = new Data(new object[] { 107, 100, 80 }) }
+            //});
 
             return View(chart);
-        }
 
+        }
     }
 }

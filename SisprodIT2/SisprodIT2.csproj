@@ -151,7 +151,7 @@
     <Compile Include="Areas\Funcionario\Models\FuncionarioModel.cs" />
     <Compile Include="Areas\Perfil\PerfilAreaRegistration.cs" />
     <Compile Include="Areas\Relatorio\Controllers\RelatorioController.cs" />
-    <Compile Include="Areas\Relatorio\Models\QtdChamado.cs" />
+    <Compile Include="Areas\Relatorio\Models\RelatoriosViewModels.cs" />
     <Compile Include="Areas\Relatorio\RelatorioAreaRegistration.cs" />
     <Compile Include="Areas\Setor\Controllers\SetorController.cs" />
     <Compile Include="Areas\Setor\Models\SetorModel.cs" />
